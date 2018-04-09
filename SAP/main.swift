@@ -8,8 +8,9 @@
 
 import Foundation
 
-SAP();
 
 func SAP() {
     print("SAAAAAAAP")
 }
+
+SAP()
