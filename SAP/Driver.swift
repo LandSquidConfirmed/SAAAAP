@@ -29,7 +29,7 @@ struct Driver {
         
         while num != 0 {
             let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
-            NSObject.performSelector(command)
+            NSObject.perform(command)
             
             num = mem[programCounter]
         }
