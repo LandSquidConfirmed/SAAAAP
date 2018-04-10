@@ -10,4 +10,11 @@ import Foundation
 
 struct Driver {
     
+    var ProgramMemory: [Int]
+    
+    init(Program: String) {
+        ProgramMemory = splitStringIntoParts(expression: Program).map{Int($0)!}
+    }
+    
+    
 }
