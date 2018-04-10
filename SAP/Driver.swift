@@ -11,6 +11,7 @@ import Foundation
 struct Driver {
     
     var mem: [Int]
+    var registers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     
     init(Program: String) {
         mem = splitStringIntoParts(expression: Program).map{Int($0)!}
@@ -21,8 +22,7 @@ struct Driver {
         let programLength = mem[0]
         var programCounter = mem[1]
         
-        
-        
+        while
         
         
         
