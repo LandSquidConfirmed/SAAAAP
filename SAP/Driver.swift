@@ -11,19 +11,26 @@ import Foundation
 struct Driver {
     
     var mem: [Int]
+    let programLength: Int
+    var programCounter: Int
     var registers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     
     init(Program: String) {
         mem = splitStringIntoParts(expression: Program).map{Int($0)!}
+        let programLength = mem[0]
+        var programCounter = mem[1]
+        mem.remove(at: 0)
+        mem.remove(at: 0)
     }
     
     func Driver() {
+        var num = mem[programCounter]
         
-        let programLength = mem[0]
-        var programCounter = mem[1]
-        
-        while
-        
+        while num != 0 {
+            
+            
+            num = mem[programCounter]
+        }
         
         
         
