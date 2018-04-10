@@ -14,6 +14,7 @@ struct Driver {
     let programLength: Int
     var programCounter: Int
     var registers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    var lastcmp = 0
     
     init(Program: String) {
         mem = splitStringIntoParts(expression: Program).map{Int($0)!}
@@ -34,7 +35,7 @@ struct Driver {
         
     }
     
-    func movmr(label: Int, r: Int){
+    mutating func movmr(label: Int, r: Int){
         registers[r] = mem[label]
     }
     func outs(label: Int){
@@ -45,11 +46,24 @@ struct Driver {
     func outcr(r: Int){
         print(registers[r])
     }
-    func movrr(r1: Int, r2: Int){
+    mutating func movrr(r1: Int, r2: Int){
         registers[r2] = registers[r1]
     }
-    func addrr(r1: Int, r2: Int){
+    mutating func addrr(r1: Int, r2: Int){
         registers[r2] += registers[r1]
     }
-    
+    func printi(r: Int){
+        print(registers[r])
+    }
+    mutating func cmprr(r1: Int, r2: Int){
+        lastcmp = registers[r2] - registers[r1]
+    }
+    mutating func addir(r: Int, int: Int){
+        registers[r] += int
+    }
+    mutating func jmpne(label: Int){
+        if lastcmp != 0{
+            programCounter = mem[label]
+        }
+    }
 }
