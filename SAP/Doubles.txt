@@ -1,4 +1,4 @@
-;   A Simple Test Program in SAP
+;A Simple Test Program in SAP
             .Start Test
 Begin:      .Integer #0
 End:        .Integer #20
