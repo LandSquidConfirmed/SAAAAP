@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Driver {
+class Driver: NSObject {
     
     var mem: [Int]
     let programLength: Int
@@ -18,8 +18,8 @@ struct Driver {
     
     init(Program: String) {
         mem = splitStringIntoLines(expression: Program).map{Int($0)!}
-        let programLength = mem[0]
-        var programCounter = mem[1]
+        self.programLength = mem[0]
+        self.programCounter = mem[1]
         mem.remove(at: 0)
         mem.remove(at: 0)
     }
@@ -29,14 +29,13 @@ struct Driver {
         
         while num != 0 {
             let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
-            NSObject.perform(command)
-            
+            perform(command)
             num = mem[programCounter]
         }
         
     }
     
-    mutating func movmr(label: Int, r: Int){
+    func movmr(label: Int, r: Int){
         registers[r] = mem[label]
     }
     func outs(label: Int){
@@ -47,22 +46,22 @@ struct Driver {
     func outcr(r: Int){
         print(registers[r])
     }
-    mutating func movrr(r1: Int, r2: Int){
+    func movrr(r1: Int, r2: Int){
         registers[r2] = registers[r1]
     }
-    mutating func addrr(r1: Int, r2: Int){
+    func addrr(r1: Int, r2: Int){
         registers[r2] += registers[r1]
     }
     func printi(r: Int){
         print(registers[r])
     }
-    mutating func cmprr(r1: Int, r2: Int){
+    func cmprr(r1: Int, r2: Int){
         lastcmp = registers[r2] - registers[r1]
     }
-    mutating func addir(r: Int, int: Int){
+    func addir(r: Int, int: Int){
         registers[r] += int
     }
-    mutating func jmpne(label: Int){
+    func jmpne(label: Int){
         if lastcmp != 0{
             programCounter = mem[label]
         }
