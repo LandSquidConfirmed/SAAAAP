@@ -10,7 +10,7 @@ import Foundation
 
 
 func SAP() {
-    print("SAAAAAAAd")
+    print("GLAAAAD")
 }
 
 SAP()
