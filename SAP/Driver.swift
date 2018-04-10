@@ -17,7 +17,7 @@ struct Driver {
     var lastcmp = 0
     
     init(Program: String) {
-        mem = splitStringIntoParts(expression: Program).map{Int($0)!}
+        mem = splitStringIntoLines(expression: Program).map{Int($0)!}
         let programLength = mem[0]
         var programCounter = mem[1]
         mem.remove(at: 0)
@@ -29,7 +29,7 @@ struct Driver {
         
         while num != 0 {
             let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
-            
+            NSObject.performSelector(command)
             
             num = mem[programCounter]
         }
