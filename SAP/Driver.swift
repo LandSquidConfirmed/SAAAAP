@@ -27,6 +27,7 @@ struct Driver {
         var num = mem[programCounter]
         
         while num != 0 {
+            let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
             
             
             num = mem[programCounter]
