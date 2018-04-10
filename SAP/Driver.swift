@@ -10,11 +10,24 @@ import Foundation
 
 struct Driver {
     
-    var ProgramMemory: [Int]
+    var mem: [Int]
     
     init(Program: String) {
-        ProgramMemory = splitStringIntoParts(expression: Program).map{Int($0)!}
+        mem = splitStringIntoParts(expression: Program).map{Int($0)!}
     }
     
+    func Driver() {
+        
+        let programLength = mem[0]
+        var programCounter = mem[1]
+        
+        
+        
+        
+        
+        
+        
+        
+    }
     
 }
