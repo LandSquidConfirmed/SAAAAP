@@ -29,6 +29,7 @@
 		74674ADB207BD7290024480C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		74A3BAA4207D60D000657A5D /* Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support.swift; sourceTree = "<group>"; };
 		74A3BAA6207D63E800657A5D /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
+		74A3BAA9207D661400657A5D /* Doubles.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Doubles.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +62,7 @@
 		74674ADA207BD7290024480C /* SAP */ = {
 			isa = PBXGroup;
 			children = (
+				74A3BAA9207D661400657A5D /* Doubles.txt */,
 				74674ADB207BD7290024480C /* main.swift */,
 				74A3BAA4207D60D000657A5D /* Support.swift */,
 				74A3BAA6207D63E800657A5D /* Driver.swift */,
