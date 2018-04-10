@@ -32,25 +32,24 @@ struct Driver {
             num = mem[programCounter]
         }
         
-        
-        
-        func movmr(Int: label, Int: r){
-            registers[r] = mem[label]
+    }
+    
+    func movmr(Int: label, Int: r){
+        registers[r] = mem[label]
+    }
+    func outs(Int: label){
+        for i in 1...mem[label]{
+            print(mem[label + i])
         }
-        func outs(Int: label){
-            for i in 1...mem[label]{
-                print(mem[label + i])
-            }
-        }
-        func outcr(Int: r){
-            print(registers[r])
-        }
-        func movrr(Int: r1, Int: r2){
-            registers[r2] = registers[r1]
-        }
-        func addrr(Int: r1, Int r2){
-            registers[r2] += registers[r1]
-        }
+    }
+    func outcr(Int: r){
+        print(registers[r])
+    }
+    func movrr(Int: r1, Int: r2){
+        registers[r2] = registers[r1]
+    }
+    func addrr(Int: r1, Int r2){
+        registers[r2] += registers[r1]
     }
     
 }
