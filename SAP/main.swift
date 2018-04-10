@@ -8,9 +8,4 @@
 
 import Foundation
 
-
-func SAP() {
-    print("GLAAAAD")
-}
-
-SAP()
+var SAP = Driver(Program: readTextFile("/Users/magosheehy/Documents/SAAAAP/SAP/Numbers.txt").1!)
