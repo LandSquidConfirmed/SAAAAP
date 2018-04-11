@@ -50,7 +50,6 @@ class Driver: NSObject {
             case "addir": addir(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "jmpne": jmpne(mem[programCounter + 1])
-                programCounter += 2
             default: print("Bad Command or something")
                 return
             }
@@ -90,6 +89,9 @@ class Driver: NSObject {
     func jmpne(_ label: Int){
         if lastcmp != 0{
             programCounter = mem[label]
+        }
+        else {
+            programCounter += 2
         }
     }
 }
