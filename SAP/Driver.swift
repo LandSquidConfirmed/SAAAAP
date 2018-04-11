@@ -61,11 +61,9 @@ class Driver: NSObject {
         registers[r] = mem[label]
     }
     func outs(_ label: Int){
-        var string = ""
         for i in 1...mem[label]{
-            string += String(uniToChar(mem[label + i]))
+            print(String(uniToChar(mem[label + i])), terminator:"")
         }
-        print(string)
     }
     func outcr(_ r: Int){
         print(String(uniToChar(registers[r])))
@@ -77,7 +75,7 @@ class Driver: NSObject {
         registers[r2] += registers[r1]
     }
     func printi(_ r: Int){
-        print(registers[r])
+        print(registers[r], terminator:"")
     }
     func cmprr(_ r1: Int, _ r2: Int){
         lastcmp = registers[r2] - registers[r1]
