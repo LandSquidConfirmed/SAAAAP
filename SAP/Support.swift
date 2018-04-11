@@ -18,7 +18,7 @@ func uniToChar(_ n: Int)-> Character {
 }
 
 enum Command: Int{
-    case halt, clrr, clrx, clmr, clrb, movir, movrr, movrm, movmr, movxr, movar, movb, addir, addrr, addmr, addxr, subir, subrr, submr, subxr, mulir, mulrr, mulmr, mulxr, divir, divrr, divmr, divxr, jmp, sojz, sojnz, aojz, aojnz, cmpir, cmprr, cmpmr, jmpn, jmpz, jmpp, jsr, ret, push, pop, stackc, outci, outcr, outcx, outcb, readi, printi, readc, readln, brk, movrx, movxx, outs, nop, jmpne
+    case halt, clrr, clrx, clmr, clrb, movir, movrr, movrm, movmr, movxr, movar, movb, addir, addrr, addmr, addxr, subir, subrr, submr, subxr, mulir, mulrr, mulmr, mulxr, divir, divrr, divmr, divxr, jmp, sojz, sojnz, aojz, aojnz, cmpir, cmprr, cmpmr, jmpn, jmpz, jmpp, jsr, ret, push, pop, stackc, outci, outcr, outcx, outcb, readi, printi, readc, readln, brk, movrx, movxx, outs, nop, jmpne, kachow
 }
 
 func readTextFile(_ path: String) -> (message: String?, fileText: String?) {
@@ -40,4 +40,8 @@ func splitStringIntoParts(expression: String) -> [String] {
 
 func splitStringIntoLines(expression: String) -> [String] {
     return expression.characters.split{$0 == "\n"}.map{ String($0) }
+}
+
+func kachow() {
+    print("Yeehaw")
 }
