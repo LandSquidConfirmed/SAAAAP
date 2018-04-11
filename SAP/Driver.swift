@@ -55,7 +55,6 @@ class Driver: NSObject {
             }
             num = mem[programCounter]
         }
-        
     }
     
     func movmr(_ label: Int, _ r: Int){
@@ -83,12 +82,12 @@ class Driver: NSObject {
     func cmprr(_ r1: Int, _ r2: Int){
         lastcmp = registers[r2] - registers[r1]
     }
-    func addir(_ r: Int, _ int: Int){
-        registers[r] += int
+    func addir(_ num: Int, _ r: Int){
+        registers[r] += num
     }
     func jmpne(_ label: Int){
         if lastcmp != 0{
-            programCounter = mem[label]
+            programCounter = label
         }
         else {
             programCounter += 2
