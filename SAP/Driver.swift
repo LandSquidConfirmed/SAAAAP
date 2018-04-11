@@ -66,7 +66,7 @@ class Driver: NSObject {
         }
     }
     func outcr(_ r: Int){
-        print(String(uniToChar(registers[r])))
+        print(String(uniToChar(registers[r])), terminator:"")
     }
     func movrr(_ r1: Int, _ r2: Int){
         registers[r2] = registers[r1]
