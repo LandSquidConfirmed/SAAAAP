@@ -63,9 +63,11 @@ class Driver: NSObject {
         registers[r] = mem[label]
     }
     func outs(_ label: Int){
+        var string = ""
         for i in 1...mem[label]{
-            print(uniToChar(mem[label + i]))
+            string += String(uniToChar(mem[label + i]))
         }
+        print(string)
     }
     func outcr(_ r: Int){
         print(registers[r])
