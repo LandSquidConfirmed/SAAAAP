@@ -30,7 +30,7 @@ class Driver: NSObject {
         while num != 0 {
             //let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
             //perform(command)
-            let command = String(describing: Command(rawValue: num))
+            let command = String(describing: Command(rawValue: num)!)
             
             switch command {
             case "movmr": movmr(mem[programCounter + 1], mem[programCounter + 2])
@@ -44,7 +44,7 @@ class Driver: NSObject {
             case "jmpne": jmpne(mem[programCounter + 1])
             default: print("Bad Command or something")
             }
-            
+            programCounter += 1
             num = mem[programCounter]
         }
         
