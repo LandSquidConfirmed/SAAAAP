@@ -31,20 +31,29 @@ class Driver: NSObject {
             //let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
             //perform(command)
             let command = String(describing: Command(rawValue: num)!)
-            
+            //print(command)
             switch command {
             case "movmr": movmr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "outs": outs(mem[programCounter + 1])
+                programCounter += 2
             case "outcr": outcr(mem[programCounter + 1])
+                programCounter += 2
             case "movrr": movrr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "addrr": addrr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "printi": printi(mem[programCounter + 1])
+                programCounter += 2
             case "cmprr": cmprr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "addir": addir(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "jmpne": jmpne(mem[programCounter + 1])
+                programCounter += 2
             default: print("Bad Command or something")
+                return
             }
-            programCounter += 1
             num = mem[programCounter]
         }
         
