@@ -64,7 +64,7 @@ class Driver: NSObject {
     }
     func outs(_ label: Int){
         for i in 1...mem[label]{
-            print(unitoChar(mem[label + i]))
+            print(uniToChar(mem[label + i]))
         }
     }
     func outcr(_ r: Int){
