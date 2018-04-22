@@ -46,14 +46,19 @@ class Driver: NSObject {
                 programCounter += 2
             case "clrb": clrb(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
+            case "movir": movir(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "movrr": movrr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "movrm": movrm(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+                
             case "movmr": movmr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "outs": outs(mem[programCounter + 1])
                 programCounter += 2
             case "outcr": outcr(mem[programCounter + 1])
                 programCounter += 2
-            case "movrr": movrr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
             case "addrr": addrr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "printi": printi(mem[programCounter + 1])
@@ -87,9 +92,18 @@ class Driver: NSObject {
         mem[registers[r]] = 0
     }
     func clrb(_ r: Int, _ b: Int) {
-        for registers[r]...(registers[r] + b) in mem {
-            
+        for e in registers[r]...(registers[r] + b){
+            mem[e] = 0
         }
+    }
+    func movir(_ i: Int, _ r: Int) {
+        registers[r] = i
+    }
+    func movrr(_ r1: Int, _ r2: Int){
+        registers[r2] = registers[r1]
+    }
+    func movrm(_ r: Int, _ m: Int){
+        mem[m] = registers[r]
     }
     func movmr(_ label: Int, _ r: Int){
         registers[r] = mem[label]
@@ -101,9 +115,6 @@ class Driver: NSObject {
     }
     func outcr(_ r: Int){
         print(String(uniToChar(registers[r])), terminator:"")
-    }
-    func movrr(_ r1: Int, _ r2: Int){
-        registers[r2] = registers[r1]
     }
     func addrr(_ r1: Int, _ r2: Int){
         registers[r2] += registers[r1]
