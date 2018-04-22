@@ -147,7 +147,7 @@ class Driver: NSObject {
         registers[r2] += registers[r1]
     }
     func cmpir(_ num: Int, _ r: Int){
-        lastcmp = registers[r1] - num
+        lastcmp = registers[r] - num
     }
     func cmprr(_ r1: Int, _ r2: Int){
         lastcmp = registers[r2] - registers[r1]
