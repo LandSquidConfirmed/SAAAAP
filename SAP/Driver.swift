@@ -42,18 +42,28 @@ class Driver: NSObject {
                 programCounter += 3
             case "outs": outs(mem[programCounter + 1])
                 programCounter += 2
-            case "outcr": outcr(mem[programCounter + 1])
-                programCounter += 2
             case "movrr": movrr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "addrr": addrr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
-            case "printi": printi(mem[programCounter + 1])
-                programCounter += 2
             case "cmprr": cmprr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "addir": addir(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
+            case "outci": outci(mem[programCounter + 1])
+                programCounter += 2
+            case "outcr": outcr(mem[programCounter + 1])
+                programCounter += 2
+            case "outcx": outcx(mem[programCounter + 1])
+                programCounter += 2
+            case "outcb": outcb(mem[programCounter + 1], mem[programCounter])
+                programCounter += 3
+            case "readi": readi(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "printi": printi(mem[programCounter + 1])
+                programCounter += 2
+            case "readc": readc(_r: mem[programCounter + 1])
+                programCounter += 2
             case "readln": readln(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "brk": brk()
@@ -86,23 +96,40 @@ class Driver: NSObject {
             print(String(uniToChar(mem[label + i])), terminator:"")
         }
     }
-    func outcr(_ r: Int){
-        print(String(uniToChar(registers[r])), terminator:"")
-    }
     func movrr(_ r1: Int, _ r2: Int){
         registers[r2] = registers[r1]
     }
     func addrr(_ r1: Int, _ r2: Int){
         registers[r2] += registers[r1]
     }
-    func printi(_ r: Int){
-        print(registers[r], terminator:"")
-    }
     func cmprr(_ r1: Int, _ r2: Int){
         lastcmp = registers[r2] - registers[r1]
     }
     func addir(_ num: Int, _ r: Int){
         registers[r] += num
+    }
+    func outci(_ num: Int){
+        print(num)
+    }
+    func outcr(_ r: Int){
+        print(String(uniToChar(registers[r])), terminator:"")
+    }
+    func outcx(_ r: Int){
+        print(String(uniToChar(mem[registers[r]])), terminator:"")
+    }
+    func outcb(_ r1: Int, _ r2: Int){
+        for i in 0..<registers[r2]{
+            print(String(uniToChar(mem[registers[r1 + i]])), terminator:"")
+        }
+    }
+    func readi(_ r1: Int, _ r2: Int){
+        
+    }
+    func printi(_ r: Int){
+        print(registers[r], terminator:"")
+    }
+    func readc(_r: Int){
+        
     }
     func readln(_ label: Int, _ r: Int){
         for _ in 0..<r{
