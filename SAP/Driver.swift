@@ -10,8 +10,7 @@ import Foundation
 
 class Driver: NSObject {
     
-    var mem: [Int]
-    
+    var mem = [Int](repeating: 0, count: 10002)
     let programLength: Int
     var programCounter: Int
     var registers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -19,7 +18,11 @@ class Driver: NSObject {
     var stack = IntStack(size: 10000)
     
     init(Program: String) {
-        mem = splitStringIntoLines(expression: Program).map{Int($0)!}
+        var iter = 0
+        for e in splitStringIntoLines(expression: Program).map({Int($0)!}) {
+            mem[iter] = e
+            iter += 1
+        }
         self.programLength = mem[0]
         self.programCounter = mem[1]
         mem.remove(at: 0)
