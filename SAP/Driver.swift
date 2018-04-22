@@ -52,18 +52,15 @@ class Driver: NSObject {
                 programCounter += 3
             case "movrm": movrm(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
-                
             case "movmr": movmr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
-            case "outs": outs(mem[programCounter + 1])
-                programCounter += 2
-            case "outcr": outcr(mem[programCounter + 1])
-                programCounter += 2
+            case "movxr": movxr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "addir": addir(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "addrr": addrr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "cmprr": cmprr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
-            case "addir": addir(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "outci": outci(mem[programCounter + 1])
                 programCounter += 2
@@ -87,6 +84,8 @@ class Driver: NSObject {
                 programCounter += 3
             case "movxx": movxx(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
+            case "outs": outs(mem[programCounter + 1])
+                programCounter += 2
             case "nop": nop()
                 programCounter += 1
             case "jmpne": jmpne(mem[programCounter + 1])
