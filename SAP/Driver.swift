@@ -70,6 +70,21 @@ class Driver: NSObject {
                 programCounter += 3
             case "subir": addir(-(mem[programCounter + 1]), mem[programCounter + 2])
                 programCounter += 3
+            case "divrr": divrr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "divmr": divmr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "divxr": divxr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "jmp": jmp(mem[programCounter + 1])
+            case "sojz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "sojnz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "aojz": aojz(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "aojnz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "cmpir": cmpir(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "cmprr": cmprr(mem[programCounter + 1], mem[programCounter + 2])
@@ -173,6 +188,42 @@ class Driver: NSObject {
     }
     func addxr(_ r1: Int, _ r2: Int){
         registers[r2] += registers[r1]
+    }
+    func divrr(_ r1: Int, _ r2: Int){
+        registers[2] /= registers[1]
+    }
+    func divmr(_ label: Int, _ r: Int){
+        registers[r] /= mem[label]
+    }
+    func divxr(_ r1: Int, _ r2: Int){
+        registers[r2] /= mem[registers[r1]]
+    }
+    func jmp(_ label: Int){
+        programCounter = label
+    }
+    func sojz(_ r: Int, _ label: Int){
+        addir(-1, r)
+        if (registers[r] == 0){
+            programCounter = label - 3
+        }
+    }
+    func sojnz(_ r: Int, _ label: Int){
+        addir(-1, r)
+        if (registers[r] != 0){
+            programCounter = label - 3
+        }
+    }
+    func aojz(_ r: Int, _ label: Int){
+        addir(1, r)
+        if (registers[r] == 0){
+            programCounter = label - 3
+        }
+    }
+    func aojnz(_ r: Int, _ label: Int){
+        addir(1, r)
+        if (registers[r] != 0){
+            programCounter = label - 3
+        }
     }
     func cmpir(_ num: Int, _ r: Int){
         lastcmp = registers[r] - num
