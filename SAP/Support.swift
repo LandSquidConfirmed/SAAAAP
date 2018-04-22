@@ -46,22 +46,21 @@ func kachow() {
     print("Yeehaw")
 }
 
-struct Stack<T>: CustomStringConvertible, Sequence, IteratorProtocol {
+struct IntStack: CustomStringConvertible {
     
     let size: Int
-    var stackIterator: Int
-    var stack = [T]()
+    
+    var stack = [Int]()
     
     init(size: Int) {
         self.size = size
-        self.stackIterator = size
     }
     
     func isEmpty()-> Bool {return stack.count == 0}
     
     func isFull()-> Bool {return stack.count == size}
     
-    mutating func push(element: T) {
+    mutating func push(element: Int) {
         if stack.count == size {
             print("Stack Overflow")
             return
@@ -69,7 +68,7 @@ struct Stack<T>: CustomStringConvertible, Sequence, IteratorProtocol {
         stack.append(element)
     }
     
-    mutating func pop()-> T? {
+    mutating func pop()-> Int? {
         if stack.count == 0 {
             print("Stack Empty")
             return nil
@@ -77,23 +76,7 @@ struct Stack<T>: CustomStringConvertible, Sequence, IteratorProtocol {
         return stack.removeLast()
     }
     
-    
-    mutating func next() -> T? {
-        stackIterator -= 1
-        if stackIterator == -1 {
-            stackIterator = size
-            return nil
-        }
-        else {
-            return stack[stackIterator]
-        }
-    }
-    
     var description: String {
-        var printout = ""
-        for e in stack {
-            printout += "\(e) "
-        }
-        return printout
+        return "\(stack)"
     }
 }
