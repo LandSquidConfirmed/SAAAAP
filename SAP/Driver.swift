@@ -119,19 +119,14 @@ class Driver: NSObject {
     func movmr(_ label: Int, _ r: Int){
         registers[r] = mem[label]
     }
-    func outs(_ label: Int){
-        for i in 1...mem[label]{
-            print(String(uniToChar(mem[label + i])), terminator:"")
-        }
+    func addir(_ num: Int, _ r: Int){
+        registers[r] += num
     }
     func addrr(_ r1: Int, _ r2: Int){
         registers[r2] += registers[r1]
     }
     func cmprr(_ r1: Int, _ r2: Int){
         lastcmp = registers[r2] - registers[r1]
-    }
-    func addir(_ num: Int, _ r: Int){
-        registers[r] += num
     }
     func outci(_ num: Int){
         print(num)
@@ -169,6 +164,11 @@ class Driver: NSObject {
     }
     func movxx(_ x1: Int, _ x2: Int){
         mem[x2] = mem[x1]
+    }
+    func outs(_ label: Int){
+        for i in 1...mem[label]{
+            print(String(uniToChar(mem[label + i])), terminator:"")
+        }
     }
     func nop(){ }
     func jmpne(_ label: Int){
