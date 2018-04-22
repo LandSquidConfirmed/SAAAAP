@@ -56,9 +56,19 @@ class Driver: NSObject {
                 programCounter += 3
             case "movxr": movxr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
+            case "movar": movar(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "movb": movb(mem[programCounter + 1], mem[programCounter + 2], mem[programCounter + 3])
+                programCounter += 4
             case "addir": addir(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "addrr": addrr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "addmr": addmr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "addxr": addxr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "subir": subir(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "cmprr": cmprr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
@@ -103,7 +113,7 @@ class Driver: NSObject {
         mem[registers[r]] = 0
     }
     func clrb(_ r: Int, _ b: Int) {
-        for e in registers[r]...(registers[r] + b){
+        for e in registers[r]..<(registers[r] + b){
             mem[e] = 0
         }
     }
@@ -122,11 +132,32 @@ class Driver: NSObject {
     func movxr(_ r1: Int, _ r2: Int) {
         registers[r2] = mem[registers[r1]]
     }
+    func movar(_ label: Int, _ r: Int) {
+        registers[r] = label
+    }
+    func movb(_ r1: Int, _ r2: Int, _ r3: Int) {
+        var b = [Int](repeating: 0, count: r3)
+        for e in r1..<(r1 + r3) {
+            b[e] = mem[e]
+        }
+        for e in r2..<(r2 + r3) {
+            mem[e] = b[e]
+        }
+    }
     func addir(_ num: Int, _ r: Int){
         registers[r] += num
     }
     func addrr(_ r1: Int, _ r2: Int){
         registers[r2] += registers[r1]
+    }
+    func addmr(_ m: Int, _ r: Int) {
+        registers[r] += mem[m]
+    }
+    func addxr(_ r1: Int, _ r2: Int){
+        registers[r2] += registers[r1]
+    }
+    func subir(_ i: Int, _ r: Int) {
+        registers[r] -= i
     }
     func cmprr(_ r1: Int, _ r2: Int){
         lastcmp = registers[r2] - registers[r1]
