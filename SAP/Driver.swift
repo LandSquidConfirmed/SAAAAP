@@ -65,6 +65,7 @@ class Driver: NSObject {
             case "addrr": addrr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "addmr": addmr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "cmpir": cmpir(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "addxr": addxr(mem[programCounter + 1], mem[programCounter + 2])
@@ -169,6 +170,7 @@ class Driver: NSObject {
     }
     func addmr(_ m: Int, _ r: Int) {
         registers[r] += mem[m]
+    }
     func cmpir(_ num: Int, _ r: Int){
         lastcmp = registers[r] - num
     }
@@ -279,3 +281,4 @@ class Driver: NSObject {
         }
     }
 }
+
