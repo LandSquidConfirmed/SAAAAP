@@ -15,7 +15,7 @@ class Driver: NSObject {
     var programCounter: Int
     var registers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     var lastcmp = 0
-    var stack = IntStack(10000)
+    var stack = IntStack(size: 10000)
     
     init(Program: String) {
         mem = splitStringIntoLines(expression: Program).map{Int($0)!}

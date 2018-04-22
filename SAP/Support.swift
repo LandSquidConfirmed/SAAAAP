@@ -52,7 +52,7 @@ struct IntStack: CustomStringConvertible {
     
     var stack = [Int]()
     
-    init(_ size: Int) {
+    init(size: Int) {
         self.size = size
     }
     
