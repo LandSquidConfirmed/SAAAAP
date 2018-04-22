@@ -59,6 +59,16 @@ class Driver: NSObject {
                 programCounter += 3
             case "addir": addir(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
+            case "readln": readln(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "brk": brk()
+                programCounter += 1
+            case "movrx": movrx(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "movxx": movxx(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "nop": nop()
+                programCounter += 1
             case "jmpne": jmpne(mem[programCounter + 1])
             default: print("Bad Command or something")
                 return
@@ -104,6 +114,21 @@ class Driver: NSObject {
     func addir(_ num: Int, _ r: Int){
         registers[r] += num
     }
+    func readln(_ label: Int, _ r: Int){
+        for _ in 0..<r{
+            
+        }
+    }
+    func brk(){
+        
+    }
+    func movrx(_ r: Int, _ x: Int){
+        mem[x] = registers[r]
+    }
+    func movxx(_ x1: Int, _ x2: Int){
+        mem[x2] = mem[x1]
+    }
+    func nop(){ }
     func jmpne(_ label: Int){
         if lastcmp != 0{
             programCounter = label
