@@ -10,7 +10,7 @@ import Foundation
 
 class Driver: NSObject {
     
-    var mem: [Int]
+    var mem = [Int](repeating: 0, count: 10002)
     let programLength: Int
     var programCounter: Int
     var registers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -18,7 +18,11 @@ class Driver: NSObject {
     var stack = IntStack(size: 10000)
     
     init(Program: String) {
-        mem = splitStringIntoLines(expression: Program).map{Int($0)!}
+        var iter = 0
+        for e in splitStringIntoLines(expression: Program).map({Int($0)!}) {
+            mem[iter] = e
+            iter += 1
+        }
         self.programLength = mem[0]
         self.programCounter = mem[1]
         mem.remove(at: 0)
@@ -38,6 +42,10 @@ class Driver: NSObject {
                 programCounter += 2
             case "clrx": clrx(mem[programCounter + 1])
                 programCounter += 2
+            case "clrm": clrx(mem[programCounter + 1])
+                programCounter += 2
+            case "clrb": clrb(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "movmr": movmr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "outs": outs(mem[programCounter + 1])
@@ -87,6 +95,11 @@ class Driver: NSObject {
     }
     func clrx(_ r: Int) {
         mem[registers[r]] = 0
+    }
+    func clrb(_ r: Int, _ b: Int) {
+        for registers[r]...(registers[r] + b) in mem {
+            
+        }
     }
     func movmr(_ label: Int, _ r: Int){
         registers[r] = mem[label]
