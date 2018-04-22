@@ -34,6 +34,10 @@ class Driver: NSObject {
             let command = String(describing: Command(rawValue: num)!)
             //print(command)
             switch command {
+            case "clrr": clrr(mem[programCounter + 1])
+                programCounter += 2
+            case "clrx": clrx(mem[programCounter + 1])
+                programCounter += 2
             case "movmr": movmr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "outs": outs(mem[programCounter + 1])
@@ -58,6 +62,12 @@ class Driver: NSObject {
         }
     }
     
+    func clrr(_ r: Int) {
+        registers[r] = 0
+    }
+    func clrx(_ r: Int) {
+        mem[registers[r]] = 0
+    }
     func movmr(_ label: Int, _ r: Int){
         registers[r] = mem[label]
     }
