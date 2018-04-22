@@ -39,99 +39,107 @@ class Driver: NSObject {
             //print(command)
             switch command {
             case "clrr": clrr(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "clrx": clrx(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "clrm": clrx(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "clrb": clrb(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "movir": movir(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "movrr": movrr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "movrm": movrm(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "movmr": movmr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "movxr": movxr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "movar": movar(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "movb": movb(mem[programCounter + 1], mem[programCounter + 2], mem[programCounter + 3])
-                programCounter += 4
+            programCounter += 4
             case "addir": addir(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "addrr": addrr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "addmr": addmr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "addxr": addxr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "subir": addir(-(mem[programCounter + 1]), mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "subrr": addrr(-(mem[programCounter + 1]), mem[programCounter + 2])
-                programCounter += 3
+            case "divrr": divrr(mem[programCounter + 1], mem[programCounter + 2])
+            programCounter += 3
             case "submr": addmr(-(mem[programCounter + 1]), mem[programCounter + 2])
-                programCounter += 3
+            case "divmr": divmr(mem[programCounter + 1], mem[programCounter + 2])
+            programCounter += 3
             case "subxr": addxr(-(mem[programCounter + 1]), mem[programCounter + 2])
-                programCounter += 3
+            case "divxr": divxr(mem[programCounter + 1], mem[programCounter + 2])
+            programCounter += 3
             case "mulir": mulir(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            case "jmp": jmp(mem[programCounter + 1])
+            case "sojz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
+            programCounter += 3
             case "mulrr": mulrr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            case "sojnz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
+            programCounter += 3
             case "mulmr": mulmr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            case "aojz": aojz(mem[programCounter + 1], mem[programCounter + 2])
+            programCounter += 3
             case "mulxr": mulxr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            case "aojnz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
+            programCounter += 3
             case "divir": divir(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "cmpir": cmpir(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "cmprr": cmprr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "cmpmr": cmpmr(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "jmpn": jmpn(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "jmpz": jmpz(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "jmpp": jmpp(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "jsr": jsr(mem[programCounter + 1])
             case "ret": ret()
             case "push": push(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "pop": pop(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "stackc": stackc(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "outci": outci(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "outcr": outcr(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "outcx": outcx(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "outcb": outcb(mem[programCounter + 1], mem[programCounter])
-                programCounter += 3
+            programCounter += 3
             case "readi": readi(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "printi": printi(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "readc": readc(_r: mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "readln": readln(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "brk": brk()
-                programCounter += 1
+            programCounter += 1
             case "movrx": movrx(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "movxx": movxx(mem[programCounter + 1], mem[programCounter + 2])
-                programCounter += 3
+            programCounter += 3
             case "outs": outs(mem[programCounter + 1])
-                programCounter += 2
+            programCounter += 2
             case "nop": nop()
-                programCounter += 1
+            programCounter += 1
             case "jmpne": jmpne(mem[programCounter + 1])
             default: print("Bad Command or something")
                 return
@@ -193,17 +201,53 @@ class Driver: NSObject {
     func mulir(_ i: Int, _ r: Int) {
         registers[r] *= i
     }
+    func divrr(_ r1: Int, _ r2: Int){
+        registers[2] /= registers[1]
+    }
     func mulrr(_ r1: Int, _ r2: Int) {
         registers[r2] *= registers[r1]
+    }
+    func divmr(_ label: Int, _ r: Int){
+        registers[r] /= mem[label]
     }
     func mulmr(_ m: Int, _ r: Int) {
         registers[r] *= mem[m]
     }
+    func divxr(_ r1: Int, _ r2: Int){
+        registers[r2] /= mem[registers[r1]]
+    }
     func mulxr(_ x: Int, _ r: Int) {
         registers[r] *= mem[registers[x]]
     }
+    func jmp(_ label: Int){
+        programCounter = label
+    }
     func divir(_ i: Int, _ r: Int) {
         registers[r] /= i
+    }
+    func sojz(_ r: Int, _ label: Int){
+        addir(-1, r)
+        if (registers[r] == 0){
+            programCounter = label - 3
+        }
+    }
+    func sojnz(_ r: Int, _ label: Int){
+        addir(-1, r)
+        if (registers[r] != 0){
+            programCounter = label - 3
+        }
+    }
+    func aojz(_ r: Int, _ label: Int){
+        addir(1, r)
+        if (registers[r] == 0){
+            programCounter = label - 3
+        }
+    }
+    func aojnz(_ r: Int, _ label: Int){
+        addir(1, r)
+        if (registers[r] != 0){
+            programCounter = label - 3
+        }
     }
     func cmpir(_ num: Int, _ r: Int){
         lastcmp = registers[r] - num
