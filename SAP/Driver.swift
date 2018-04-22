@@ -70,6 +70,22 @@ class Driver: NSObject {
                 programCounter += 3
             case "subir": addir(-(mem[programCounter + 1]), mem[programCounter + 2])
                 programCounter += 3
+            case "subrr": addrr(-(mem[programCounter + 1]), mem[programCounter + 2])
+                programCounter += 3
+            case "submr": addmr(-(mem[programCounter + 1]), mem[programCounter + 2])
+                programCounter += 3
+            case "subxr": addxr(-(mem[programCounter + 1]), mem[programCounter + 2])
+                programCounter += 3
+            case "mulir": mulir(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "mulrr": mulrr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "mulmr": mulmr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "mulxr": mulxr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "divir": divir(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "cmpir": cmpir(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "cmprr": cmprr(mem[programCounter + 1], mem[programCounter + 2])
@@ -173,6 +189,21 @@ class Driver: NSObject {
     }
     func addxr(_ r1: Int, _ r2: Int){
         registers[r2] += registers[r1]
+    }
+    func mulir(_ i: Int, _ r: Int) {
+        registers[r] *= i
+    }
+    func mulrr(_ r1: Int, _ r2: Int) {
+        registers[r2] *= registers[r1]
+    }
+    func mulmr(_ m: Int, _ r: Int) {
+        registers[r] *= mem[m]
+    }
+    func mulxr(_ x: Int, _ r: Int) {
+        registers[r] *= mem[registers[x]]
+    }
+    func divir(_ i: Int, _ r: Int) {
+        registers[r] /= i
     }
     func cmpir(_ num: Int, _ r: Int){
         lastcmp = registers[r] - num
