@@ -137,6 +137,9 @@ class Driver: NSObject {
     func movmr(_ label: Int, _ r: Int){
         registers[r] = mem[label]
     }
+    func movxr(_ r1: Int, _ r2: Int) {
+        registers[r2] = mem[registers[r1]]
+    }
     func addir(_ num: Int, _ r: Int){
         registers[r] += num
     }
