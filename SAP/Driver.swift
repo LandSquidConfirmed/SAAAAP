@@ -125,9 +125,6 @@ class Driver: NSObject {
             print(String(uniToChar(mem[label + i])), terminator:"")
         }
     }
-    func outcr(_ r: Int){
-        print(String(uniToChar(registers[r])), terminator:"")
-    }
     func addrr(_ r1: Int, _ r2: Int){
         registers[r2] += registers[r1]
     }
