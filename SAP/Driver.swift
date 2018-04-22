@@ -60,8 +60,26 @@ class Driver: NSObject {
                 programCounter += 3
             case "addrr": addrr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
+            case "cmpir": cmpir(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "cmprr": cmprr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
+            case "cmpmr": cmpmr(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
+            case "jmpn": jmpn(mem[programCounter + 1])
+                programCounter += 2
+            case "jmpz": jmpz(mem[programCounter + 1])
+                programCounter += 2
+            case "jmpp": jmpp(mem[programCounter + 1])
+                programCounter += 2
+            case "jsr": jsr(mem[programCounter + 1])
+            case "ret": ret()
+            case "push": push(mem[programCounter + 1])
+                programCounter += 2
+            case "pop": pop(mem[programCounter + 1])
+                programCounter += 2
+            case "stackc": stackc(mem[programCounter + 1])
+                programCounter += 2
             case "outci": outci(mem[programCounter + 1])
                 programCounter += 2
             case "outcr": outcr(mem[programCounter + 1])
@@ -125,8 +143,57 @@ class Driver: NSObject {
     func addrr(_ r1: Int, _ r2: Int){
         registers[r2] += registers[r1]
     }
+    func cmpir(_ num: Int, _ r: Int){
+        lastcmp = registers[r1] - num
+    }
     func cmprr(_ r1: Int, _ r2: Int){
         lastcmp = registers[r2] - registers[r1]
+    }
+    func cmpmr(_ label: Int, _ r: Int){
+        lastcmp = registers[r] - mem[label]
+    }
+    func jmpn(_ label: Int){
+        if lastcmp < 0{
+            programCounter = label - 2
+        }
+    }
+    func jmpz(_ label: Int){
+        if lastcmp == 0{
+            programCounter = label - 2
+        }
+    }
+    func jmpp(_ label: Int){
+        if lastcmp > 0{
+            programCounter = label - 2
+        }
+    }
+    func jsr (_ label: Int){
+        stack.push(element: registers[5])
+        stack.push(element: registers[6])
+        stack.push(element: registers[7])
+        stack.push(element: registers[8])
+        stack.push(element: registers[9])
+        stack.push(element: programCounter)
+        programCounter = label
+    }
+    func ret(){
+        programCounter = stack.pop()! + 1
+        registers[9] = stack.pop()!
+        registers[8] = stack.pop()!
+        registers[7] = stack.pop()!
+        registers[6] = stack.pop()!
+        registers[5] = stack.pop()!
+    }
+    func push(_ r: Int){
+        stack.push(element: registers[r])
+    }
+    func pop(_ r: Int){
+        registers[r] = stack.pop()!
+    }
+    func stackc(_ r: Int){
+        if stack.isEmpty() {registers[r] = 2}
+        else if stack.isFull() {registers[r] = 1}
+        else{registers[r] = 0}
     }
     func outci(_ num: Int){
         print(num)
