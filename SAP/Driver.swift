@@ -11,6 +11,7 @@ import Foundation
 class Driver: NSObject {
     
     var mem: [Int]
+    
     let programLength: Int
     var programCounter: Int
     var registers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -38,6 +39,10 @@ class Driver: NSObject {
                 programCounter += 2
             case "clrx": clrx(mem[programCounter + 1])
                 programCounter += 2
+            case "clrm": clrx(mem[programCounter + 1])
+                programCounter += 2
+            case "clrb": clrb(mem[programCounter + 1], mem[programCounter + 2])
+                programCounter += 3
             case "movmr": movmr(mem[programCounter + 1], mem[programCounter + 2])
                 programCounter += 3
             case "outs": outs(mem[programCounter + 1])
@@ -67,6 +72,11 @@ class Driver: NSObject {
     }
     func clrx(_ r: Int) {
         mem[registers[r]] = 0
+    }
+    func clrb(_ r: Int, _ b: Int) {
+        for registers[r]...(registers[r] + b) in mem {
+            
+        }
     }
     func movmr(_ label: Int, _ r: Int){
         registers[r] = mem[label]
