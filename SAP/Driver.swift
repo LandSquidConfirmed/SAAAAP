@@ -66,7 +66,7 @@ class Driver: NSObject {
             programCounter += 3
             case "addmr": addmr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
-            case "addxr": addxr(mem[programCounter + 1], mem[programCounter + 2])
+            case "addxr": addmr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
             case "subir": addir(-(mem[programCounter + 1]), mem[programCounter + 2])
             programCounter += 3
@@ -194,9 +194,6 @@ class Driver: NSObject {
     }
     func addmr(_ m: Int, _ r: Int) {
         registers[r] += mem[m]
-    }
-    func addxr(_ r1: Int, _ r2: Int){
-        registers[r2] += registers[r1]
     }
     func mulir(_ i: Int, _ r: Int) {
         registers[r] *= i
