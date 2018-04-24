@@ -76,7 +76,7 @@ class Driver: NSObject {
             case "submr": addmr(-(mem[programCounter + 1]), mem[programCounter + 2])
             case "divmr": divmr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
-            case "subxr": addxr(-(mem[programCounter + 1]), mem[programCounter + 2])
+            case "subxr": addmr(-(mem[programCounter + 1]), mem[programCounter + 2])
             case "divxr": divxr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
             case "mulir": mulir(mem[programCounter + 1], mem[programCounter + 2])
