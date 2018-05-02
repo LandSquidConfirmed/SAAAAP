@@ -28,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		19440ED7207D6AAE0048DF10 /* Numbers.txt */ = {isa = PBXFileReference; explicitFileType = text; path = Numbers.txt; sourceTree = "<group>"; };
+		199141B02097FCCB000F7C9F /* Turing.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Turing.txt; sourceTree = "<group>"; };
 		74674AD8207BD7290024480C /* SAP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SAP; sourceTree = BUILT_PRODUCTS_DIR; };
 		74674ADB207BD7290024480C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		749665A92099EE0E00023D6F /* Assembler Chunker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assembler Chunker.swift"; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 			children = (
 				74A3BAA9207D661400657A5D /* Doubles.txt */,
 				19440ED7207D6AAE0048DF10 /* Numbers.txt */,
+				199141B02097FCCB000F7C9F /* Turing.txt */,
 				74674ADB207BD7290024480C /* main.swift */,
 				74A3BAA4207D60D000657A5D /* Support.swift */,
 				749665A92099EE0E00023D6F /* Assembler Chunker.swift */,
