@@ -36,7 +36,7 @@ func splitFile(file: String)-> [Chunk] {//doesn't account for comment mid line
                 if last == ":" {chunks.append(Chunk(type: .LabelDefinition, stringValue: p)); continue}
                 var foundInstruction = false
                 for e in 0...57 {
-                    if String(describing: Command(rawValue: e)) == (p + "/n") {
+                    if String(describing: Command(rawValue: e)!) == (p) {
                         chunks.append(Chunk(type: .Instruction, stringValue: p))
                         foundInstruction = true
                         break
