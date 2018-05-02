@@ -20,6 +20,6 @@ Do01:       movrr r8 r1
             outcr r0
             cmprr r8 r9
             addir #1 #8
-            jmpne do01
+            jmpne Do01
 wh01:       halt
             .end
