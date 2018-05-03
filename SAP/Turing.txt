@@ -105,3 +105,4 @@ outcx r1
 addir #1 r1
 sojnz r0 Print
 halt
+

@@ -10,8 +10,8 @@ import Foundation
 
 var SAP = Driver(Program: readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Numbers.txt").1!)
 
-var file = readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Doubles.txt")
-for e in splitFile(file: file.fileText!) {
+var file = readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Turing.txt")
+for e in tokenizeilator(splitFile(file: file.fileText!)) {
     e.printThis()
 }
 
