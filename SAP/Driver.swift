@@ -176,6 +176,7 @@ class Driver: NSObject {
     }
     func movar(_ label: Int, _ r: Int) {
         registers[r] = label
+        print(label)
     }
     func movb(_ r1: Int, _ r2: Int, _ r3: Int) {
         var b = [Int](repeating: 0, count: r3)
