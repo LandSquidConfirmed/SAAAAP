@@ -29,16 +29,19 @@ addmr text2 r8
 movxr r8 r7
 cmpmr z r7
 jmpz Loop2
-movmr y r6
+
+Help: movmr y r6
 addir #1 r6
 movrm r6 y
 movmr x r5
 cmpir #8 r5
 jmpz WIsOne
-movmr y r5
+
+Help2: movmr y r5
 cmpir #5 r5
-jmpz WIsOne
-movir #0 r9
+jmpz WIsOne2
+
+Help 3: movir #0 r9
 cmpmr w r9
 jmpz Loop
 ret
@@ -55,7 +58,7 @@ addmr text2 r8
 movxr r8 r7
 cmprr r7 r2
 jmpz Loop3
-ret
+jmp Help
 
 Loop3: movir #5 r8
 mulmr y r8
@@ -79,25 +82,31 @@ addmr text2 r8
 movxr r8 r7
 cmpir #1 r7
 jmpz Loop4
-jmpnz Loop5
-movir #-1 r6
+
+Help4: jmpnz Loop5
+
+Help5: movir #-1 r6
 movrm r6 y
 
 Loop4: movar x r5
 movmr x r4
 addir 1 r4
 movrx r4 r5
-ret
+jmp Help4
 
 Loop5: movar x r5
 movmr x r4
 subir 1 r4
 movrx r4 r5
-ret
+jmp Help5
 
 WIsOne: movir #1 r4
 movrm r4 w
-ret
+jmp Help2
+
+WIsOne2: movir #1 r4
+movrm r4 w
+jmp Help3
 
 Print:  movmr tape r0
 movmr tape r1
@@ -105,4 +114,3 @@ outcx r1
 addir #1 r1
 sojnz r0 Print
 halt
-
