@@ -6,7 +6,7 @@
 //  Copyright © 2018 Generic Organization. All rights reserved.
 //
 
-/*import Foundation
+import Foundation
 
 
 class Assembler {
@@ -190,3 +190,4 @@ class Assembler {
     }
     private func kachow() {}
 }
+

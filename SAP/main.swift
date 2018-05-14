@@ -10,6 +10,7 @@ import Foundation
 
 var SAP = Driver(Program: readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Numbers.txt").1!)
 var assem = Assembler()
+var SAP = Driver(Program: readTextFile("/Users/magosheehy/Desktop/Folder/Turing.bin").1!)
 
 var file = readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Turing.txt")
 for e in tokenizeilator(splitFile(file: file.fileText!)) {
@@ -20,4 +21,5 @@ assem.passOne(tokenizeilator(splitFile(file: file.fileText!)))
 print(assem.bin)
 print(assem.symbolTable)
 
-SAP.Driver()
+//SAP.Driver()
+
