@@ -35,6 +35,7 @@ class Driver: NSObject {
         while num != 0 {
             //let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
             //perform(command)
+            print(num)
             let command = String(describing: Command(rawValue: num)!)
             //print(command)
             switch command {
@@ -86,8 +87,10 @@ class Driver: NSObject {
             case "jmp": jmp(mem[programCounter + 1])
             case "sojz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
             case "mulrr": mulrr(mem[programCounter + 1], mem[programCounter + 2])
+            programCounter += 3
             case "sojnz": sojnz(mem[programCounter + 1], mem[programCounter + 2])
             case "mulmr": mulmr(mem[programCounter + 1], mem[programCounter + 2])
+            programCounter += 3
             case "aojz": aojz(mem[programCounter + 1], mem[programCounter + 2])
             case "mulxr": mulxr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
@@ -299,7 +302,7 @@ class Driver: NSObject {
         programCounter = label
     }
     func ret(){
-        programCounter = stack.pop()! + 1
+        programCounter = stack.pop()! + 2
         registers[9] = stack.pop()!
         registers[8] = stack.pop()!
         registers[7] = stack.pop()!

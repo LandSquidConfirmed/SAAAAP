@@ -8,11 +8,11 @@
 
 import Foundation
 
-var SAP = Driver(Program: readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Numbers.txt").1!)
+var SAP = Driver(Program: readTextFile("/Users/magosheehy/Desktop/Folder/Turing.bin").1!)
 
-var file = readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Turing.txt")
-for e in tokenizeilator(splitFile(file: file.fileText!)) {
-    e.printThis()
-}
+//var file = readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Turing.txt")
+//for e in tokenizeilator(splitFile(file: file.fileText!)) {
+    //e.printThis()
+//}
 
-//SAP.Driver()
+SAP.Driver()
