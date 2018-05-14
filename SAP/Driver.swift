@@ -223,7 +223,7 @@ class Driver: NSObject {
     func sojz(_ r: Int, _ label: Int){
         addir(-1, r)
         if (registers[r] == 0){
-            programCounter = label - 3
+            programCounter = label
         }
         else {
             programCounter += 3
@@ -232,7 +232,7 @@ class Driver: NSObject {
     func sojnz(_ r: Int, _ label: Int){
         addir(-1, r)
         if (registers[r] != 0){
-            programCounter = label - 3
+            programCounter = label
         }
         else {
             programCounter += 3
@@ -241,7 +241,7 @@ class Driver: NSObject {
     func aojz(_ r: Int, _ label: Int){
         addir(1, r)
         if (registers[r] == 0){
-            programCounter = label - 3
+            programCounter = label
         }
         else {
             programCounter += 3
@@ -250,7 +250,7 @@ class Driver: NSObject {
     func aojnz(_ r: Int, _ label: Int){
         addir(1, r)
         if (registers[r] != 0){
-            programCounter = label - 3
+            programCounter = label
         }
         else {
             programCounter += 3
@@ -267,7 +267,7 @@ class Driver: NSObject {
     }
     func jmpn(_ label: Int){
         if lastcmp < 0{
-            programCounter = label - 2
+            programCounter = label
         }
         else {
             programCounter += 2
@@ -275,7 +275,7 @@ class Driver: NSObject {
     }
     func jmpz(_ label: Int){
         if lastcmp == 0{
-            programCounter = label - 2
+            programCounter = label
         }
         else {
             programCounter += 2
@@ -283,7 +283,7 @@ class Driver: NSObject {
     }
     func jmpp(_ label: Int){
         if lastcmp > 0{
-            programCounter = label - 2
+            programCounter = label
         }
         else {
             programCounter += 2
