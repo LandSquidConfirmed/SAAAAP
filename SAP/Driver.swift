@@ -86,7 +86,7 @@ class Driver: NSObject {
             case "jmp": jmp(mem[programCounter + 1])
             case "sojz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
             case "mulrr": mulrr(mem[programCounter + 1], mem[programCounter + 2])
-            case "sojnz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
+            case "sojnz": sojnz(mem[programCounter + 1], mem[programCounter + 2])
             case "mulmr": mulmr(mem[programCounter + 1], mem[programCounter + 2])
             case "aojz": aojz(mem[programCounter + 1], mem[programCounter + 2])
             case "mulxr": mulxr(mem[programCounter + 1], mem[programCounter + 2])
