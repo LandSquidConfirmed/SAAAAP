@@ -35,7 +35,7 @@ class Driver: NSObject {
         while num != 0 {
             //let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
             //perform(command)
-            print(num)
+            //print(num)
             let command = String(describing: Command(rawValue: num)!)
             //print(command)
             switch command {
@@ -176,7 +176,6 @@ class Driver: NSObject {
     }
     func movar(_ label: Int, _ r: Int) {
         registers[r] = label
-        print(label)
     }
     func movb(_ r1: Int, _ r2: Int, _ r3: Int) {
         var b = [Int](repeating: 0, count: r3)
@@ -350,8 +349,8 @@ class Driver: NSObject {
     }
     func brk(){
     }
-    func movrx(_ r: Int, _ x: Int){
-        mem[x] = registers[r]
+    func movrx(_ r1: Int, _ r2: Int){
+        mem[registers[r1]] = registers[r2]
     }
     func movxx(_ x1: Int, _ x2: Int){
         mem[x2] = mem[x1]
