@@ -101,11 +101,8 @@ class Driver: NSObject {
             case "cmpmr": cmpmr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
             case "jmpn": jmpn(mem[programCounter + 1])
-            programCounter += 2
             case "jmpz": jmpz(mem[programCounter + 1])
-            programCounter += 2
             case "jmpp": jmpp(mem[programCounter + 1])
-            programCounter += 2
             case "jsr": jsr(mem[programCounter + 1])
             case "ret": ret()
             case "push": push(mem[programCounter + 1])
@@ -271,15 +268,24 @@ class Driver: NSObject {
         if lastcmp < 0{
             programCounter = label - 2
         }
+        else {
+            programCounter += 2
+        }
     }
     func jmpz(_ label: Int){
         if lastcmp == 0{
             programCounter = label - 2
         }
+        else {
+            programCounter += 2
+        }
     }
     func jmpp(_ label: Int){
         if lastcmp > 0{
             programCounter = label - 2
+        }
+        else {
+            programCounter += 2
         }
     }
     func jsr (_ label: Int){
@@ -339,7 +345,6 @@ class Driver: NSObject {
         }
     }
     func brk(){
-        
     }
     func movrx(_ r: Int, _ x: Int){
         mem[x] = registers[r]
