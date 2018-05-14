@@ -16,7 +16,7 @@ jsr Loop
 jsr Print
 
 splitStringIntoParts: movxr r0 r3
-movrm r3 r2
+movrx r3 r2
 addir #1 r2
 addir #1 r0
 sojnz r1 splitStringIntoParts
@@ -41,7 +41,7 @@ Help2: movmr y r5
 cmpir #5 r5
 jmpz WIsOne2
 
-Help 3: movir #0 r9
+Help3: movir #0 r9
 cmpmr w r9
 jmpz Loop
 ret
@@ -74,7 +74,9 @@ mulmr y r8
 addir #4 r8
 addmr text2 r8
 movxr r8 r7
-addrx r7 r5
+movxr r5 r9
+addrr r7 r9
+movrx r9 r5
 movir #5 r8
 mulmr y r8
 addir #5 r8
@@ -83,20 +85,20 @@ movxr r8 r7
 cmpir #1 r7
 jmpz Loop4
 
-Help4: jmpnz Loop5
+Help4: jmpp Loop5
 
 Help5: movir #-1 r6
 movrm r6 y
 
 Loop4: movar x r5
 movmr x r4
-addir 1 r4
+addir #1 r4
 movrx r4 r5
 jmp Help4
 
 Loop5: movar x r5
 movmr x r4
-subir 1 r4
+subir #1 r4
 movrx r4 r5
 jmp Help5
 
