@@ -20,7 +20,7 @@ class Assembler {
         while e < tokens.count {
             let token = tokens[e]
             if token.type == .Directive {
-                
+                e += 1
             }
             else if token.type == .Instruction {
                 bin.append(token.intValue!)
@@ -104,7 +104,9 @@ class Assembler {
                 case "jmpp": label(tokens[e + 1])
                 e += 2
                 case "jsr": label(tokens[e + 1])
+                e += 1
                 case "ret": kachow()
+                e += 1
                 case "push": r(tokens[e + 1])
                 e += 2
                 case "pop": r(tokens[e + 1])
@@ -141,10 +143,9 @@ class Assembler {
                 default: print("Bad Command or something")
                     return
                 }
-                Command(rawValue: e)
             }
-            else if token.type == .LabelDefinition {
-                
+            else if token.type == .LabelDefinition { //Need to do this to fix getting the erroy you're getting with the start thingy
+                e += 1
             }
             else {
                 print("Invalid token type at beginning of line: ", terminator: "")
@@ -187,7 +188,5 @@ class Assembler {
             print("Undeclared Label: " + label.stringValue! + " Used")
         }
     }
-    private func kachow() {
-        
-    }
+    private func kachow() {}
 }
