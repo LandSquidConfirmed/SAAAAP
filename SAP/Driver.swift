@@ -71,27 +71,27 @@ class Driver: NSObject {
             case "subir": addir(-(mem[programCounter + 1]), mem[programCounter + 2])
             programCounter += 3
             case "subrr": addrr(-(mem[programCounter + 1]), mem[programCounter + 2])
+            programCounter += 3
             case "divrr": divrr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
             case "submr": addmr(-(mem[programCounter + 1]), mem[programCounter + 2])
+            programCounter += 3
             case "divmr": divmr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
             case "subxr": addmr(-(mem[programCounter + 1]), mem[programCounter + 2])
             case "divxr": divxr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
             case "mulir": mulir(mem[programCounter + 1], mem[programCounter + 2])
+            programCounter += 3
             case "jmp": jmp(mem[programCounter + 1])
             case "sojz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
             case "mulrr": mulrr(mem[programCounter + 1], mem[programCounter + 2])
             case "sojnz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
             case "mulmr": mulmr(mem[programCounter + 1], mem[programCounter + 2])
             case "aojz": aojz(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
             case "mulxr": mulxr(mem[programCounter + 1], mem[programCounter + 2])
-            case "aojnz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
+            case "aojnz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
             case "divir": divir(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
             case "cmpir": cmpir(mem[programCounter + 1], mem[programCounter + 2])
@@ -228,11 +228,17 @@ class Driver: NSObject {
         if (registers[r] == 0){
             programCounter = label - 3
         }
+        else {
+            programCounter += 3
+        }
     }
     func sojnz(_ r: Int, _ label: Int){
         addir(-1, r)
         if (registers[r] != 0){
             programCounter = label - 3
+        }
+        else {
+            programCounter += 3
         }
     }
     func aojz(_ r: Int, _ label: Int){
@@ -240,11 +246,17 @@ class Driver: NSObject {
         if (registers[r] == 0){
             programCounter = label - 3
         }
+        else {
+            programCounter += 3
+        }
     }
     func aojnz(_ r: Int, _ label: Int){
         addir(1, r)
         if (registers[r] != 0){
             programCounter = label - 3
+        }
+        else {
+            programCounter += 3
         }
     }
     func cmpir(_ num: Int, _ r: Int){
