@@ -11,9 +11,9 @@ Start:  movar tape r0
 movmr tape r1
 movar tape3 r2
 addir #1 r0
-jmp splitStringIntoParts
-jmp Loop
-jmp Print
+jsr splitStringIntoParts
+jsr Loop
+jsr Print
 
 splitStringIntoParts: movxr r0 r3
 movrm r3 r2
