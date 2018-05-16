@@ -67,7 +67,7 @@ class Driver: NSObject {
             programCounter += 3
             case "addmr": addmr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
-            case "addxr": addmr(mem[programCounter + 1], mem[programCounter + 2])
+            case "addxr": addxr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
             case "subir": addir(-(mem[programCounter + 1]), mem[programCounter + 2])
             programCounter += 3
@@ -79,7 +79,7 @@ class Driver: NSObject {
             programCounter += 3
             case "divmr": divmr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
-            case "subxr": addmr(-(mem[programCounter + 1]), mem[programCounter + 2])
+            case "subxr": addxr(-(mem[programCounter + 1]), mem[programCounter + 2])
             case "divxr": divxr(mem[programCounter + 1], mem[programCounter + 2])
             programCounter += 3
             case "mulir": mulir(mem[programCounter + 1], mem[programCounter + 2])
@@ -146,6 +146,7 @@ class Driver: NSObject {
             }
             num = mem[programCounter]
         }
+        
     }
     
     func clrr(_ r: Int) {
@@ -195,6 +196,9 @@ class Driver: NSObject {
     func addmr(_ m: Int, _ r: Int) {
         registers[r] += mem[m]
     }
+    func addxr(_ r1: Int, _ r2: Int) {
+        registers[r2] += mem[registers[r1]]
+    }
     func mulir(_ i: Int, _ r: Int) {
         registers[r] *= i
     }
@@ -208,7 +212,8 @@ class Driver: NSObject {
         registers[r] /= mem[label]
     }
     func mulmr(_ m: Int, _ r: Int) {
-        registers[r] *= mem[m]
+        let x = registers[r] * mem[m]
+        registers[r] = x
     }
     func divxr(_ r1: Int, _ r2: Int){
         registers[r2] /= mem[registers[r1]]
@@ -350,10 +355,10 @@ class Driver: NSObject {
     func brk(){
     }
     func movrx(_ r1: Int, _ r2: Int){
-        mem[registers[r1]] = registers[r2]
+        mem[registers[r2]] = registers[r1]
     }
-    func movxx(_ x1: Int, _ x2: Int){
-        mem[x2] = mem[x1]
+    func movxx(_ r1: Int, _ r2: Int){
+        mem[registers[r2]] = mem[registers[r1]]
     }
     func outs(_ label: Int){
         for i in 1...mem[label]{

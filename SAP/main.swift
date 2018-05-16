@@ -10,7 +10,7 @@ import Foundation
 
 var SAP = Driver(Program: readTextFile("/Users/magosheehy/Desktop/Folder/Turing.bin").1!)
 
-//var file = readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Turing.txt")
+//var file = readTextFile("/Users/magosheehy/Desktop/Folder/Turing.bin")
 //for e in tokenizeilator(splitFile(file: file.fileText!)) {
     //e.printThis()
 //}
