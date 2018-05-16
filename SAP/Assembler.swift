@@ -14,13 +14,27 @@ class Assembler {
     //Symbol table stored in dict.
     var symbolTable = [String: Int?]()
     var bin = [Int]()
+    var programSize = 0
+    var initialPC = 0
     
     func passOne(_ tokens: [Token]) {
         var e = 0
         while e < tokens.count {
             let token = tokens[e]
             if token.type == .Directive {
-                e += 1
+                switch String(describing: token.stringValue!) {
+                case ".Start": start(tokens[e + 1])
+                    e += 2
+                case ".Integer": bin.append(tokens[e + 1].intValue!)
+                    e += 1
+                case ".String": string(tokens[e + 1])
+                    e += 2
+                case ".end": break
+                case ".allocate": allocate(tokens[e + 1])
+                    e += 2
+                default: print("————————————Invalid Directive: " + token.stringValue! + "————————————")
+                    e += 1
+                }
             }
             else if token.type == .Instruction {
                 bin.append(token.intValue!)
@@ -145,6 +159,7 @@ class Assembler {
                 }
             }
             else if token.type == .LabelDefinition { //Need to do this to fix getting the erroy you're getting with the start thingy
+                symbolTable[token.stringValue!] = e + 1
                 e += 1
             }
             else {
@@ -155,6 +170,27 @@ class Assembler {
         }
     }
     //Need Error Checking
+    
+    private func start(_ label: Token) {
+        if symbolTable[label.stringValue!] != nil {
+            initialPC = symbolTable[label.stringValue!]!!
+        }
+        else {
+            initialPC = -1
+        }
+    }
+    private func string(_ string: Token) {
+        bin.append(string.stringValue!.count)
+        for e in string.stringValue!.characters {
+            print(e)
+            bin.append(charToUni(e))
+        }
+    }
+    private func allocate(_ size: Token) {
+        for e in 1...size.intValue! {
+            bin.append(0)
+        }
+    }
     private func rr(_ r: Token, _ r2: Token){
         bin.append(r.intValue!)
         bin.append(r2.intValue!)
@@ -167,6 +203,7 @@ class Assembler {
             bin.append(symbolTable[label.stringValue!]!!)
         }
         else {
+            bin.append(-1)
             print("Undeclared Label: " + label.stringValue! + " Used")
         }
     }
@@ -176,6 +213,8 @@ class Assembler {
             bin.append(symbolTable[label.stringValue!]!!)
         }
         else {
+            bin.append(r.intValue!)
+            bin.append(-1)
             print("Undeclared Label: " + label.stringValue! + " Used")
         }
     }
@@ -185,6 +224,8 @@ class Assembler {
             bin.append(r.intValue!)
         }
         else {
+            bin.append(-1)
+            bin.append(r.intValue!)
             print("Undeclared Label: " + label.stringValue! + " Used")
         }
     }
