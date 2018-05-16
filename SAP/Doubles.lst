@@ -1,0 +1,31 @@
+0:                   
+0: 0                 Begin:      .Integer #0
+1: 20                End:        .Integer #20
+2: 10                NewLine:    .Integer #10
+3: 26 65 32 80       IntroMess:  .String "A Program To Print Doubles"
+30: 12 32 68 111     DoubleMess: .String " Doubled is "
+43: 8 0 8            Test:       movmr Begin r8
+46: 8 1 9                        movmr End r9
+49: 8 2 0                        movmr NewLine r0
+52: 55 3                         outs IntroMess
+54: 45 0                         outcr r0
+56: 6 8 1            Do01:       movrr r8 r1
+59: 13 8 1                       addrr r8 r1
+62: 49 8                         printi r8
+64: 55 30                        outs DoubleMess
+66: 49 1                         printi r1
+68: 45 0                         outcr r0
+70: 34 8 9                       cmprr r8 r9
+73: 12 1 8                       addir #1 r8
+76: 57 56                        jmpne Do01
+78: 0                wh01:       halt
+
+Symbol Table:
+newline 2 
+doublemess 30 
+test 43 
+do01 56 
+intromess 3 
+end 1 
+wh01 78 
+begin 0 

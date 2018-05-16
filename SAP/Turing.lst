@@ -1,0 +1,116 @@
+0:                   
+0: 0 0 0 0           tape3: .allocate #8
+8: 8 50 48 48        tape: .String "20001112"
+17: 25 49 48 49      text2: .String "1011102021111010110100111"
+43: 0                w: .Integer #0
+44: 0                x: .Integer #0
+45: 0                y: .Integer #0
+46: 0                z: .Integer #0
+47: 10 8 0           Start:  movar tape r0
+50: 8 8 1            movmr tape r1
+53: 10 0 2           movar tape3 r2
+56: 12 1 0           addir #1 r0
+59: 28 65            jmp splitStringIntoParts
+61: 28 81            jmp Loop
+63: 28 280           jmp Print
+65: 9 0 3            splitStringIntoParts: movxr r0 r3
+68: 53 3 2           movrx r3 r2
+71: 12 1 2           addir #1 r2
+74: 12 1 0           addir #1 r0
+77: 30 1 65          sojnz r1 splitStringIntoParts
+80: 40               ret
+81: 5 5 8            Loop:  movir #5 r8
+84: 22 45 8          mulmr y r8
+87: 12 1 8           addir #1 r8
+90: 14 17 8          addmr text2 r8
+93: 9 8 7            movxr r8 r7
+96: 35 46 7          cmpmr z r7
+99: 37 135           jmpz Loop2
+101: 8 45 6          movmr y r6
+104: 12 1 6          addir #1 r6
+107: 7 6 45          movrm r6 y
+110: 8 44 5          movmr x r5
+113: 33 8 5          cmpir #8 r5
+116: 37 273          jmpz WIsOne
+118: 8 45 5          movmr y r5
+121: 33 5 5          cmpir #5 r5
+124: 37 273          jmpz WIsOne
+126: 5 0 9           movir #0 r9
+129: 35 43 9         cmpmr w r9
+132: 37 81           jmpz Loop
+134: 40              ret
+135: 8 44 3          Loop2: movmr x r3
+138: 12 1 3          addir #1 r3
+141: 10 0 2          movar tape3 r2
+144: 13 2 3          addrr r2 r3
+147: 9 3 2           movxr r3 r2
+150: 5 5 8           movir #5 r8
+153: 22 45 8         mulmr y r8
+156: 12 2 8          addir #2 r8
+159: 14 17 8         addmr text2 r8
+162: 9 8 7           movxr r8 r7
+165: 34 7 2          cmprr r7 r2
+168: 37 171          jmpz Loop3
+170: 40              ret
+171: 5 5 8           Loop3: movir #5 r8
+174: 22 45 8         mulmr y r8
+177: 12 3 8          addir #3 r8
+180: 14 17 8         addmr text2 r8
+183: 9 8 7           movxr r8 r7
+186: 7 7 46          movrm r7 z
+189: 10 0 5          movar tape3 r5
+192: 12 1 5          addir #1 r5
+195: 14 44 5         addmr x r5
+198: 5 5 8           movir #5 r8
+201: 22 45 8         mulmr y r8
+204: 12 4 8          addir #4 r8
+207: 14 17 8         addmr text2 r8
+210: 9 8 7           movxr r8 r7
+213: 15 5 7          addxr r5 r7
+216: 53 7 5          movrx r7 r5
+219: 5 5 8           movir #5 r8
+222: 22 45 8         mulmr y r8
+225: 12 5 8          addir #5 r8
+228: 14 17 8         addmr text2 r8
+231: 9 8 7           movxr r8 r7
+234: 33 1 7          cmpir #1 r7
+237: 37 247          jmpz Loop4
+239: 38 260          jmpp Loop5
+241: 5 -1 6          movir #-1 r6
+244: 7 6 45          movrm r6 y
+247: 10 44 5         Loop4: movar x r5
+250: 8 44 4          movmr x r4
+253: 12 1 4          addir #1 r4
+256: 53 4 5          movrx r4 r5
+259: 40              ret
+260: 10 44 5         Loop5: movar x r5
+263: 8 44 4          movmr x r4
+266: 16 1 4          subir #1 r4
+269: 53 4 5          movrx r4 r5
+272: 40              ret
+273: 5 1 4           WIsOne: movir #1 r4
+276: 7 4 43          movrm r4 w
+279: 40              ret
+280: 8 8 0           Print:  movmr tape r0
+283: 8 8 1           movmr tape r1
+286: 46 1            outcx r1
+288: 12 1 1          addir #1 r1
+291: 30 0 280        sojnz r0 Print
+
+Symbol Table:
+loop4 247 
+print 280 
+text2 17 
+w 43 
+loop 81 
+x 44 
+loop3 171 
+start 47 
+splitstringintoparts 65 
+z 46 
+tape 8 
+wisone 273 
+tape3 0 
+y 45 
+loop2 135 
+loop5 260 

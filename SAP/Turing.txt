@@ -12,10 +12,23 @@ movmr tape r1
 movar tape3 r2
 addir #1 r0
 jsr splitStringIntoParts
+movar tape r0
+addir #1 r0
+movmr tape r1
+movar tape r2
+addir #1 r2
+jsr splitStringIntoParts
+movar text2 r0
+addir #1 r0
+movmr text2 r1
+movar text2 r2
+addir #1 r2
+jsr splitStringIntoParts
 jsr Loop
 jmp Print
 
 splitStringIntoParts: movxr r0 r3
+subir #48 r3
 movrx r3 r2
 addir #1 r2
 addir #1 r0
@@ -25,7 +38,8 @@ ret
 Loop:  movir #5 r8
 mulmr y r8
 addir #1 r8
-addmr text2 r8
+movar text2 r6
+addrr r6 r8
 movxr r8 r7
 cmpmr z r7
 jmpz Loop2
@@ -44,7 +58,7 @@ jmpz WIsOne2
 Help3: movir #0 r9
 cmpmr w r9
 jmpz Loop
-ret
+jmp Print
 
 Loop2: movmr x r3
 addir #1 r3
@@ -54,7 +68,8 @@ movxr r3 r2
 movir #5 r8
 mulmr y r8
 addir #2 r8
-addmr text2 r8
+movar text2 r6
+addrr r6 r8
 movxr r8 r7
 cmprr r7 r2
 jmpz Loop3
@@ -63,7 +78,8 @@ jmp Help
 Loop3: movir #5 r8
 mulmr y r8
 addir #3 r8
-addmr text2 r8
+movar text2 r6
+addrr r6 r8
 movxr r8 r7
 movrm r7 z
 movar tape3 r5
@@ -72,7 +88,8 @@ addmr x r5
 movir #5 r8
 mulmr y r8
 addir #4 r8
-addmr text2 r8
+movar text2 r6
+addrr r6 r8
 movxr r8 r7
 movxr r5 r9
 addrr r7 r9
@@ -80,7 +97,8 @@ movrx r9 r5
 movir #5 r8
 mulmr y r8
 addir #5 r8
-addmr text2 r8
+movar text2 r6
+addrr r6 r8
 movxr r8 r7
 cmpir #1 r7
 jmpz Loop4
@@ -112,9 +130,11 @@ jmp Help3
 
 Print:  movmr tape r0
 movmr tape r1
-addir #1 r1
+addir #2 r1
+subir #2 r0
 
-Help6: outcx r1
+Help6: movxr r1 r2
+printi r2
 addir #1 r1
 sojnz r0 Help6
 halt
