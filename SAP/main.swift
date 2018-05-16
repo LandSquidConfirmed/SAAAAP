@@ -12,8 +12,14 @@ var SAP = Driver(Program: readTextFile("/Users/maxwelllittle/Library/Autosave In
 var assem = Assembler()
 var SAP = Driver(Program: readTextFile("/Users/magosheehy/Desktop/Folder/Turing.bin").1!)
 
-//var file = readTextFile("/Users/magosheehy/Desktop/Folder/Turing.bin")
-//for e in tokenizeilator(splitFile(file: file.fileText!)) {
-    //e.printThis()
-//}
+var file = readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Turing.txt")
+for e in tokenizeilator(splitFile(file: file.fileText!)) {
+    e.printThis()
+}
+assem.passOne(tokenizeilator(splitFile(file: file.fileText!)))
+
+print(assem.bin)
+print(assem.symbolTable)
+
+//SAP.Driver()
 
