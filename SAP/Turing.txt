@@ -1,7 +1,7 @@
 .Start Start
-tape3: .allocate #8
-tape: .String “20001112”
-text2: .String “1011102021111010110100111”
+tape2: .allocate #8
+tape: .String "20001112"
+text2: .String "1011102021111010110100111"
 w: .Integer #0
 x: .Integer #0
 y: .Integer #0
@@ -9,14 +9,8 @@ z: .Integer #0
 
 Start:  movar tape r0
 movmr tape r1
-movar tape3 r2
+movar tape2 r2
 addir #1 r0
-jsr splitStringIntoParts
-movar tape r0
-addir #1 r0
-movmr tape r1
-movar tape r2
-addir #1 r2
 jsr splitStringIntoParts
 movar text2 r0
 addir #1 r0
@@ -27,114 +21,127 @@ jsr splitStringIntoParts
 jsr Loop
 jmp Print
 
+
 splitStringIntoParts: movxr r0 r3
 subir #48 r3
 movrx r3 r2
 addir #1 r2
 addir #1 r0
 sojnz r1 splitStringIntoParts
+Ret
+
+;while w == 0
+Loop: movir #0 r9
+cmpmr w r9
+jmpz Loop2
 ret
 
-Loop:  movir #5 r8
-mulmr y r8
+;if z == text2[y][0]
+Loop2: movar text2 r8
+divir #5 r8
 addir #1 r8
-movar text2 r6
-addrr r6 r8
+movmr y r7
+mulir #5 r7
+addir #0 r7
+addrr r7 r8
 movxr r8 r7
 cmpmr z r7
-jmpz Loop2
-
-Help: movmr y r6
-addir #1 r6
-movrm r6 y
-movmr x r5
-cmpir #8 r5
-jmpz WIsOne
-
-Help2: movmr y r5
-cmpir #5 r5
-jmpz WIsOne2
-
-Help3: movir #0 r9
-cmpmr w r9
-jmpz Loop
-jmp Print
-
-Loop2: movmr x r3
-addir #1 r3
-movar tape3 r2
-addrr r2 r3
-movxr r3 r2
-movir #5 r8
-mulmr y r8
-addir #2 r8
-movar text2 r6
-addrr r6 r8
-movxr r8 r7
-cmprr r7 r2
 jmpz Loop3
-jmp Help
+jmp Loop4
 
-Loop3: movir #5 r8
-mulmr y r8
-addir #3 r8
-movar text2 r6
-addrr r6 r8
+;if tape2[x] == text2[y][1]
+Loop3: movar text2 r6
+addmr x r6
+movar text2 r8
+divir #5 r8
+addir #1 r8
+movmr y r7
+mulir #5 r7
+addir #1 r7
+addrr r7 r8
+movxr r8 r7
+cmprr r6 r7
+jmpz Loop6
+jmp Loop4
+
+;z = text2[y][2], tape2[x] = text2[y][3], if text2[y][4] == 1
+Loop6: movar text2 r8
+divir #5 r8
+addir #1 r8
+movmr y r7
+mulir #5 r7
+addir #2 r7
+addrr r7 r8
 movxr r8 r7
 movrm r7 z
-movar tape3 r5
-addir #1 r5
-addmr x r5
-movir #5 r8
-mulmr y r8
-addir #4 r8
-movar text2 r6
-addrr r6 r8
+movar text2 r8
+divir #5 r8
+addir #1 r8
+movmr y r7
+mulir #5 r7
+addir #3 r7
+addrr r7 r8
 movxr r8 r7
-movxr r5 r9
-addrr r7 r9
-movrx r9 r5
-movir #5 r8
-mulmr y r8
-addir #5 r8
-movar text2 r6
-addrr r6 r8
+movar tape2 r6
+addmr x r6
+movrx r7 r6
+movar text2 r8
+divir #5 r8
+addir #1 r8
+movmr y r7
+mulir #5 r7
+addir #4 r7
+addrr r7 r8
 movxr r8 r7
 cmpir #1 r7
-jmpz Loop4
+jmpz Loop7
+jmp Loop8
 
-Help4: jmpp Loop5
+;x += 1
+Loop7: movmr x r5
+addir #1 r5
+movrm r5 x
+jmp Loop9
 
-Help5: movir #-1 r6
-movrm r6 y
+;x -= 1
+Loop8:  movmr x r5
+subir #1 r5
+movrm r5 x
+jmp Loop9
 
-Loop4: movar x r5
-movmr x r4
-addir #1 r4
-movrx r4 r5
-jmp Help4
+;y = -1
+Loop9: movmr y r5
+movir #-1 r5
+movrm r5 y
+jmp Loop4
 
-Loop5: movar x r5
-movmr x r4
-subir #1 r4
-movrx r4 r5
-jmp Help5
+;y += 1, if w == tape2.count || y == text2.count
+Loop4: movmr y r7
+addir #1 r7
+movrm r7 y
+movmr tape2 r7
+cmpmr x r7
+jmpz Loop5
+movmr text2 r7
+divir #5 r7
+cmpmr y r7
+jmpz Loop5
+jmp Loop
 
-WIsOne: movir #1 r4
-movrm r4 w
-jmp Help2
+;w = 1
+Loop5: movir #1 r7
+movrm r7 w
+jmp Loop
 
-WIsOne2: movir #1 r4
-movrm r4 w
-jmp Help3
-
-Print:  movmr tape r0
-movmr tape r1
-addir #2 r1
+;print(tape2)
+Print:  movir #8 r0
+movar tape2 r1
+addir #1 r1
 subir #2 r0
 
-Help6: movxr r1 r2
+PrintHelp: movxr r1 r2
 printi r2
 addir #1 r1
-sojnz r0 Help6
+sojnz r0 PrintHelp
 halt
+
