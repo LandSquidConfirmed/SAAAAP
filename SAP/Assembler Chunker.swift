@@ -70,6 +70,8 @@ func tokenizeilator(_ chunks: [Chunk])->[Token]{
             continue
         }
         if c.type == .ImmediateString {
+            let newString = c.stringValue
+            print("————————————New String: " + newString + "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n sgkjnwekjgnwekjgnwkejgnwekjgnwekjgnwgkjnwekjgnwerkjngewrkjgnwerkjgnekjngkergnwkerjgnkwergnkwerjgn")
             tokens.append(Token(type: c.type, intValue: nil, stringValue: String(c.stringValue.dropLast().dropFirst()), tupleValue: nil, description: "Oeehoo"))
             continue
         }
