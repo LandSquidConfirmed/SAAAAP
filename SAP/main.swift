@@ -20,6 +20,6 @@ assem.passOne(tokenizeilator(splitFile(file: file.fileText!)))
 
 print(assem.bin)
 print(assem.symbolTable)
-
-//SAP.Driver()
+*/
+SAP.Driver()
 
