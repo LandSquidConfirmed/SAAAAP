@@ -15,9 +15,9 @@ class Assembler {
     var symbolTable = [String: Int?]()
     var bin = [Int]()
     var programSize = 0
-    var initialPC = 0
     
     func passOne(_ tokens: [Token]) {
+        bin.append(programSize)
         var e = 0
         while e < tokens.count {
             let token = tokens[e]
@@ -119,7 +119,7 @@ class Assembler {
                 case "jmpp": label(tokens[e + 1])
                 e += 2
                 case "jsr": label(tokens[e + 1])
-                e += 1
+                e += 2
                 case "ret": kachow()
                 e += 1
                 case "push": r(tokens[e + 1])
@@ -160,7 +160,7 @@ class Assembler {
                 }
             }
             else if token.type == .LabelDefinition { //Need to do this to fix getting the erroy you're getting with the start thingy
-                symbolTable[token.stringValue!] = e + 1
+                symbolTable[token.stringValue!] = (e + 1)
                 e += 1
             }
             else {
@@ -169,15 +169,16 @@ class Assembler {
                 return
             }
         }
+        bin[0] = e
     }
     //Need Error Checking
     
     private func start(_ label: Token) {
         if symbolTable[label.stringValue!] != nil {
-            initialPC = symbolTable[label.stringValue!]!!
+            bin.insert(symbolTable[label.stringValue!]!!, at: 1)
         }
         else {
-            initialPC = -1
+            bin.insert(-1, at: 1)
         }
     }
     private func string(_ string: Token) {
