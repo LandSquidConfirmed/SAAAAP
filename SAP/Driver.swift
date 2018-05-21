@@ -171,6 +171,7 @@ class Driver: NSObject {
     }
     func movmr(_ label: Int, _ r: Int){
         registers[r] = mem[label]
+        //print(label)
     }
     func movxr(_ r1: Int, _ r2: Int) {
         registers[r2] = mem[registers[r1]]
@@ -223,6 +224,7 @@ class Driver: NSObject {
     }
     func jmp(_ label: Int){
         programCounter = label
+        //print("jmp \(label)")
     }
     func divir(_ i: Int, _ r: Int) {
         registers[r] /= i
@@ -283,6 +285,7 @@ class Driver: NSObject {
     func jmpz(_ label: Int){
         if lastcmp == 0{
             programCounter = label
+            //print("jmpz \(label)")
         }
         else {
             programCounter += 2
@@ -356,8 +359,8 @@ class Driver: NSObject {
     }
     func movrx(_ r1: Int, _ r2: Int){
         mem[registers[r2]] = registers[r1]
-        print(registers[r2])
-        print(mem[registers[r2]])
+        //print(registers[r2])
+        //print(mem[registers[r2]])
     }
     func movxx(_ r1: Int, _ r2: Int){
         mem[registers[r2]] = mem[registers[r1]]
