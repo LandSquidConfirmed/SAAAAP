@@ -1,27 +1,13 @@
 .Start Start
-length: .Integer #14
-tape2: .allocate #14
 tape: .String "-111----------"
 tuples: .String "0-0-r 012xr 2121r 2-3-r 3131r 3-41l 4141l 4-5-l 5161l 5x71l 7x71l 6161l 6x0xr"
 w: .Integer #0
-x: .Integer #1
+x: .Integer #0
 y: .Integer #0
 z: .Integer #48
 
-Start: movar tape r0
-movmr tape r1
-movar tape2 r2
-addir #1 r0
-jsr splitStringIntoParts
-jsr Loop
+Start: jsr Loop
 jmp Print
-
-splitStringIntoParts: movxr r0 r3
-movrx r3 r2
-addir #1 r2
-addir #1 r0
-sojnz r1 splitStringIntoParts
-Ret
 
 ;while w == 0
 Loop: movir #0 r9
@@ -41,9 +27,10 @@ cmpmr z r7
 jmpz Loop3
 jmp Loop4
 
-;if tape2[x] == tuples[y][1]
-Loop3: movar tape2 r6
+;if tape[x] == tuples[y][1]
+Loop3: movar tape r6
 addmr x r6
+addir #1 r6
 movxr r6 r6
 movar tuples r8
 addir #1 r8
@@ -56,7 +43,7 @@ cmprr r6 r7
 jmpz Loop6
 jmp Loop4
 
-;z = tuples[y][2], tape2[x] = tuples[y][3], if tuples[y][4] == 1
+;z = tuples[y][2], tape[x] = tuples[y][3], if tuples[y][4] == 1
 Loop6: movar tuples r8
 addir #1 r8
 movmr y r7
@@ -72,7 +59,8 @@ mulir #6 r7
 addir #3 r7
 addrr r7 r8
 movxr r8 r7
-movar tape2 r6
+movar tape r6
+addir #1 r6
 addmr x r6
 movrx r7 r6
 movar tuples r8
@@ -104,7 +92,7 @@ movir #-1 r5
 movrm r5 y
 jmp Loop4
 
-;y += 1, if x == tape2.count || y == tuples.count
+;y += 1, if x == tape.count || y == tuples.count
 Loop4: movmr y r7
 addir #1 r7
 movrm r7 y
@@ -122,12 +110,13 @@ Loop5: movir #1 r7
 movrm r7 w
 jmp Loop
 
-;print(tape2)
-Print: movmr length r0
-movar tape2 r1
+;print(tape)
+Print: movmr tape r0
+movar tape r1
 
 PrintHelp: movxr r1 r2
 outcr r2
 addir #1 r1
 sojnz r0 PrintHelp
 halt
+
