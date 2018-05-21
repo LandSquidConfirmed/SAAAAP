@@ -13,7 +13,7 @@ func splitFile(file: String)-> [Chunk] {//doesn't account for comment mid line
     let lines = splitStringIntoLines(expression: file)
     var chunks = [Chunk]()
     for l in lines {
-        var parts = splitStringIntoParts(expression: l)
+        let parts = splitStringIntoParts(expression: l)
         var stringFound = false
         if l.first == ";" {continue;}
         for p in parts {
@@ -58,7 +58,7 @@ func tokenizeilator(_ chunks: [Chunk])->[Token]{
                 print("Incorrect number of characters in register definition")
                 break
             }
-            tokens.append(Token(type: c.type, intValue: Int(String(describing: c.stringValue.characters.last)), stringValue: nil, tupleValue: nil, description: "Hnelo"))
+            tokens.append(Token(type: c.type, intValue: Int(String(describing: c.stringValue.characters.last!)), stringValue: nil, tupleValue: nil, description: "Hnelo"))
             continue
         }
         if c.type == .LabelDefinition {
@@ -143,9 +143,9 @@ struct Token: CustomStringConvertible {
     let tupleValue: Tuple?
     
     func printThis() {
-        print(stringValue)
+        print(stringValue as Any)
         print(String(describing: type))
-        print(intValue)
+        print(intValue as Any)
         print("_____________________________________________")
     }
     
