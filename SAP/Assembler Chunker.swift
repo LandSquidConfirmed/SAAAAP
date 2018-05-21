@@ -58,7 +58,7 @@ func tokenizeilator(_ chunks: [Chunk])->[Token]{
                 print("Incorrect number of characters in register definition")
                 break
             }
-            tokens.append(Token(type: c.type, intValue: Int(String(describing: c.stringValue.characters.last)), stringValue: nil, tupleValue: nil, description: "Hnelo"))
+            tokens.append(Token(type: c.type, intValue: Int(String(describing: c.stringValue.characters.last!)), stringValue: nil, tupleValue: nil, description: "Hnelo"))
             continue
         }
         if c.type == .LabelDefinition {
@@ -70,8 +70,6 @@ func tokenizeilator(_ chunks: [Chunk])->[Token]{
             continue
         }
         if c.type == .ImmediateString {
-            let newString = c.stringValue
-            print("————————————New String: " + newString + "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n sgkjnwekjgnwekjgnwkejgnwekjgnwekjgnwgkjnwekjgnwerkjngewrkjgnwerkjgnekjngkergnwkerjgnkwergnkwerjgn")
             tokens.append(Token(type: c.type, intValue: nil, stringValue: String(c.stringValue.dropLast().dropFirst()), tupleValue: nil, description: "Oeehoo"))
             continue
         }

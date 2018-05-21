@@ -26,7 +26,7 @@ class Assembler {
                 case ".Start": start(tokens[e + 1])
                     e += 2
                 case ".Integer": bin.append(tokens[e + 1].intValue!)
-                    e += 1
+                    e += 2
                 case ".String": string(tokens[e + 1])
                     e += 2
                 case ".end": break
@@ -37,8 +37,9 @@ class Assembler {
                 }
             }
             else if token.type == .Instruction {
+                token.printThis()
                 bin.append(token.intValue!)
-                switch String(describing: token.stringValue) {
+                switch String(describing: token.stringValue!) {
                 case "clrr": r(tokens[e + 1])
                 e += 2
                 case "clrx": r(tokens[e + 1])
@@ -182,7 +183,6 @@ class Assembler {
     private func string(_ string: Token) {
         bin.append(string.stringValue!.count)
         for e in string.stringValue!.characters {
-            print(e)
             bin.append(charToUni(e))
         }
     }
