@@ -328,7 +328,7 @@ class Driver: NSObject {
         else{registers[r] = 0}
     }
     func outci(_ num: Int){
-        print(num)
+        print(String(uniToChar(num)), terminator:"")
     }
     func outcr(_ r: Int){
         print(String(uniToChar(registers[r])), terminator:"")

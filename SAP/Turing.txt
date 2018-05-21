@@ -1,13 +1,16 @@
 .Start Start
-tape: .String "-111----------"
-tuples: .String "0-0-r 012xr 2121r 2-3-r 3131r 3-41l 4141l 4-5-l 5161l 5x71l 7x71l 6161l 6x0xr"
+tape: .String "_XX.YYY+"
+tuples: .String "0_0_r 0X0Ar 0.0.r 0Y0Br 0+1+l 1B1Dl 1.1.l 1A1Cl"
+current: .String "tuple"
 w: .Integer #0
 x: .Integer #0
 y: .Integer #0
 z: .Integer #48
 
-Start: jsr Loop
-jmp Print
+Start: jsr Print
+jsr Loop
+jsr Print
+halt
 
 ;while w == 0
 Loop: movir #0 r9
@@ -43,13 +46,16 @@ cmprr r6 r7
 jmpz Loop6
 jmp Loop4
 
-;z = tuples[y][2], tape[x] = tuples[y][3], if tuples[y][4] == 1
+;z = tuples[y][2], tape[x] = tuples[y][3], if tuples[y][4] == r
 Loop6: movar tuples r8
 addir #1 r8
 movmr y r7
 mulir #6 r7
 addir #2 r7
 addrr r7 r8
+subir #2 r8
+movrm r8 current
+addir #2 r8
 movxr r8 r7
 movrm r7 z
 movar tuples r8
@@ -71,6 +77,8 @@ addir #4 r7
 addrr r7 r8
 movxr r8 r7
 cmpir #114 r7
+jsr Print
+jsr PrintTuples
 jmpz Loop7
 jmp Loop8
 
@@ -112,11 +120,19 @@ jmp Loop
 
 ;print(tape)
 Print: movmr tape r0
+addir #1 r0
 movar tape r1
+jmp PrintHelp
+
+PrintTuples: movir #5 r0
+movmr current r1
+jmp PrintHelp
 
 PrintHelp: movxr r1 r2
 outcr r2
 addir #1 r1
 sojnz r0 PrintHelp
-halt
+outci #10
+ret
+
 
