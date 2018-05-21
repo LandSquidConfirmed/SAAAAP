@@ -40,6 +40,7 @@ class Assembler {
                 token.printThis()
                 bin.append(token.intValue!)
                 switch String(describing: token.stringValue!) {
+                case "halt": e += 1
                 case "clrr": r(tokens[e + 1])
                 e += 2
                 case "clrx": r(tokens[e + 1])
