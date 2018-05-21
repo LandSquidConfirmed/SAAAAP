@@ -8,6 +8,7 @@ y: .Integer #0
 z: .Integer #48
 
 Start: jsr Print
+outci #10
 jsr Loop
 jsr Print
 halt
@@ -78,7 +79,9 @@ addrr r7 r8
 movxr r8 r7
 cmpir #114 r7
 jsr Print
+outci #32
 jsr PrintTuples
+outci #10
 jmpz Loop7
 jmp Loop8
 
@@ -132,7 +135,6 @@ PrintHelp: movxr r1 r2
 outcr r2
 addir #1 r1
 sojnz r0 PrintHelp
-outci #10
 ret
 
 
