@@ -7,10 +7,10 @@ x: .Integer #0
 y: .Integer #0
 z: .Integer #48
 
-Start: jsr Print
+Start: jsr PrintWhole
 outci #10
 jsr Loop
-jsr Print
+jsr PrintWhole
 halt
 
 ;while w == 0
@@ -122,10 +122,15 @@ movrm r7 w
 jmp Loop
 
 ;print(tape)
-Print: movmr tape r0
+PrintWhole: movmr tape r0
 addir #1 r0
 movar tape r1
 jmp PrintHelp
+
+Print: movmr tape r0
+addir #1 r0
+movar tape r1
+jmp PrintHelp2
 
 PrintTuples: movir #5 r0
 movmr current r1
@@ -137,4 +142,10 @@ addir #1 r1
 sojnz r0 PrintHelp
 ret
 
+PrintHelp2: movxr r1 r2
+outcr r2
+addir #1 r1
+sojnz r0 PrintHelp
+ret
 
+.end
