@@ -66,7 +66,7 @@ func tokenizeilator(_ chunks: [Chunk])->[Token]{
             continue
         }
         if c.type == .Label {
-            tokens.append(Token(type: c.type, intValue: nil, stringValue: c.stringValue, tupleValue: nil, description: "Huuloo"))
+            tokens.append(Token(type: c.type, intValue: nil, stringValue: c.stringValue, tupleValue: nil, description: c.stringValue))
             continue
         }
         if c.type == .ImmediateString {
