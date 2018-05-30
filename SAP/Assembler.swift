@@ -14,12 +14,12 @@ class Assembler {
     //Symbol table stored in dict.
     var symbolTable = [String: Int?]()
     var emptyLabelLocs = [Int: Token]()
-    var bin = [Int]()
+    var bin = [Int?]()
     var programSize = 0
     
     func passOne(_ tokens: [Token]) {
         bin.append(programSize)
-        bin.append(-1)
+        bin.append(nil)
         var e = 0
         while e < tokens.count {
             let token = tokens[e]
@@ -36,11 +36,9 @@ class Assembler {
                 case ".allocate": allocate(tokens[e + 1])
                 e += 2
                 default: print("————————————Invalid Directive: " + token.stringValue! + "————————————")
-                e += 1
                 }
             }
             else if token.type == .Instruction {
-                token.printThis()
                 bin.append(token.intValue!)
                 switch String(describing: token.stringValue!) {
                 case "halt": bin.append(0)
@@ -157,8 +155,8 @@ class Assembler {
                 e += 3
                 case "outs": label(tokens[e + 1], e)
                 e += 2
-                case "nop":
-                    e += 1
+                case "nop": kachow()
+                e += 1
                 case "jmpne": label(tokens[e + 1], e)
                 e += 2
                 default: print("Bad Command or something")
@@ -179,13 +177,11 @@ class Assembler {
     
     
     func passTwo() {//Label not declared error here
-        print(emptyLabelLocs)
-        print(symbolTable)
+        //print(emptyLabelLocs)
+        //print(symbolTable)
         
         for t in 0..<bin.count {
-            if bin[t] == -1 {
-                print("T: " + t.description)
-                print("Bin[t]: " + bin[t].description)
+            if bin[t] == nil {
                 bin[t] = symbolTable[emptyLabelLocs[t]!.stringValue!]!!
             }
         }
@@ -200,7 +196,7 @@ class Assembler {
     //Need Error Checking
     
     private func start(_ label: Token, _ e: Int) {
-        bin[1] = -1
+        bin[1] = nil
         emptyLabelLocs[1] = label
     }
     private func string(_ string: Token) {
@@ -226,7 +222,7 @@ class Assembler {
             bin.append(symbolTable[label.stringValue!]!!)
         }
         else {
-            bin.append(-1)
+            bin.append(nil)
             emptyLabelLocs[bin.count] = label
         }
     }
@@ -237,7 +233,7 @@ class Assembler {
         }
         else {
             bin.append(r.intValue!)
-            bin.append(-1)
+            bin.append(nil)
             emptyLabelLocs[e + 2] = label
         }
     }
@@ -247,7 +243,7 @@ class Assembler {
             bin.append(r.intValue!)
         }
         else {
-            bin.append(-1)
+            bin.append(nil)
             bin.append(r.intValue!)
             emptyLabelLocs[e + 1] = label
         }

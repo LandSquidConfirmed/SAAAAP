@@ -8,21 +8,20 @@
 
 import Foundation
 
-var SAP = Driver(Program: readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/OutputNumbers.txt").1!)
+//var SAP = Driver(Program: readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Numbers.txt").1!)
 var assem = Assembler()
 //var SAP = Driver(Program: readTextFile("/Users/magosheehy/Desktop/Folder/Turing.bin").1!)
 
-var file = readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Doubles.txt")
-for e in tokenizeilator(splitFile(file: file.fileText!)) {
+var file = readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/Turing.txt")
+/*for e in tokenizeilator(splitFile(file: file.fileText!)) {
     e.printThis()
-}
+}*/
 assem.passOne(tokenizeilator(splitFile(file: file.fileText!)))
-print(assem.bin)
 assem.passTwo()
 
-for e in assem.bin {(print(e))}
+for e in assem.bin {(print(e!))}
 //print(assem.symbolTable)
-SAP.Driver()
+//SAP.Driver()
 
 
 
