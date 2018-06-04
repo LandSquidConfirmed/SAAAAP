@@ -1,7 +1,7 @@
 .Start Start
 tape: .String "_XX.YYY+"
 tuples: .String "0_0_r 0X0Ar 0.0.r 0Y0Br 0+1+l 1B1Dl 1.1.l 1A1Cl"
-current: .String "tuple"
+current: .Integer #0
 w: .Integer #0
 x: .Integer #0
 y: .Integer #0
@@ -70,6 +70,10 @@ movar tape r6
 addir #1 r6
 addmr x r6
 movrx r7 r6
+jsr Print
+outci #32
+jsr PrintTuples
+outci #10
 movar tuples r8
 addir #1 r8
 movmr y r7
@@ -78,10 +82,6 @@ addir #4 r7
 addrr r7 r8
 movxr r8 r7
 cmpir #114 r7
-jsr Print
-outci #32
-jsr PrintTuples
-outci #10
 jmpz Loop7
 jmp Loop8
 
@@ -107,11 +107,12 @@ jmp Loop4
 Loop4: movmr y r7
 addir #1 r7
 movrm r7 y
-movir #8 r7
+movmr tape r7
 cmpmr x r7
 jmpz Loop5
 movmr tuples r7
-divir #5 r7
+addir #1 r7
+divir #6 r7
 cmpmr y r7
 jmpz Loop5
 jmp Loop
@@ -123,13 +124,14 @@ jmp Loop
 
 ;print(tape)
 PrintWhole: movmr tape r0
-addir #1 r0
 movar tape r1
+addir #1 r1
 jmp PrintHelp
 
 Print: movmr tape r0
-addir #1 r0
 movar tape r1
+addir #1 r1
+movrr r1 r9
 jmp PrintHelp2
 
 PrintTuples: movir #5 r0
@@ -143,9 +145,20 @@ sojnz r0 PrintHelp
 ret
 
 PrintHelp2: movxr r1 r2
+subrr r9 r1
+cmpmr x r1
+addrr r9 r1
+jmpz Brackets
 outcr r2
-addir #1 r1
+jmp PrintHelp3
+
+PrintHelp3: addir #1 r1
 sojnz r0 PrintHelp
 ret
+
+Brackets: outci #91
+outcr r2
+outci #93
+jmp PrintHelp3
 
 .end
