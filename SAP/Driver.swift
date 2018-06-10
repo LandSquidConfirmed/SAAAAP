@@ -29,6 +29,10 @@ class Driver: NSObject {
         mem.remove(at: 0)
     }
     
+    func debugger(){
+        
+    }
+    
     func Driver() {//add quit when it gets to the end of memory
         var num = mem[programCounter]
         
