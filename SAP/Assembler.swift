@@ -193,6 +193,7 @@ class Assembler {
                     for x in lastBin..<bin.count {
                         lstLine += bin[x]!.description + " "
                     }
+                    lstLine = fit(s: lstLine, size: 20)
                     for x in lastE..<e {
                         lstLine += tokens[x].description + " "
                     }

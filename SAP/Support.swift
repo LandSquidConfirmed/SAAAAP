@@ -46,8 +46,21 @@ func splitStringIntoLines(expression: String) -> [String] {
     return expression.characters.split{$0 == "\n"}.map{ String($0) }
 }
 
-func kachow() {
-    print("Yeehaw")
+func fit(s: String, size: Int)-> String {
+    var result = s
+    while result.characters.count < size {
+        if result.characters.count < size {
+            result.append(" ")
+        }
+    }
+    while result.characters.count > size {
+        for e in 0..<result.characters.count {
+            if result.characters.count > size {
+                result.removeLast()
+            }
+        }
+    }
+    return result
 }
 
 struct IntStack: CustomStringConvertible {

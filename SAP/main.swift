@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 //var SAP = Driver(Program: readTextFile("/Users/magosheehy/Desktop/Folder/Turing.bin").1!)
 var SAP = Driver(Program: readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/OutputNumbers.txt").1!)
 var assem = Assembler()
