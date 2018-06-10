@@ -292,21 +292,21 @@ class Assembler {
     func saveLst(fileName: String) {
         var fullLst = ""
         for e in lst {
-            fullLst += e
+            fullLst += e + "\n"
         }
         writeFile(path: "/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/" + fileName + ".lst", text: fullLst)
     }
     func saveSym(fileName: String) {
         var fullTable = ""
         for e in symbolTable {
-            fullTable += e.key.description + ": " + e.value!.description
+            fullTable += e.key.description + ": " + e.value!.description + "\n"
         }
         writeFile(path: "/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/" + fileName + ".sym", text: fullTable)
     }
     func saveBin(fileName: String) {
         var fullBin = ""
         for e in bin {
-            fullBin += e!.description
+            fullBin += e!.description + "\n"
         }
         writeFile(path: "/Users/maxwelllittle/Library/Autosave Information/SAP/SAP/" + fileName + ".bin", text: fullBin)
     }

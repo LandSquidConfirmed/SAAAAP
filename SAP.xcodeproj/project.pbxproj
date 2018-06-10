@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		19440ED8207D6AAE0048DF10 /* Numbers.txt in Sources */ = {isa = PBXBuildFile; fileRef = 19440ED7207D6AAE0048DF10 /* Numbers.txt */; };
+		740C996B20CD9DF100860711 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740C996A20CD9DF100860711 /* Manager.swift */; };
 		74674ADC207BD7290024480C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74674ADB207BD7290024480C /* main.swift */; };
 		749665AA2099EE0E00023D6F /* Assembler Chunker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749665A92099EE0E00023D6F /* Assembler Chunker.swift */; };
 		749665AC209B495300023D6F /* Assembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749665AB209B495300023D6F /* Assembler.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		19440ED7207D6AAE0048DF10 /* Numbers.txt */ = {isa = PBXFileReference; explicitFileType = text; path = Numbers.txt; sourceTree = "<group>"; };
 		199141B02097FCCB000F7C9F /* Turing.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Turing.txt; sourceTree = "<group>"; };
+		740C996A20CD9DF100860711 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		74122A0620B5E05300E3AE43 /* OutputNumbers.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OutputNumbers.txt; sourceTree = "<group>"; };
 		74674AD8207BD7290024480C /* SAP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SAP; sourceTree = BUILT_PRODUCTS_DIR; };
 		74674ADB207BD7290024480C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				199141B02097FCCB000F7C9F /* Turing.txt */,
 				74122A0620B5E05300E3AE43 /* OutputNumbers.txt */,
 				74674ADB207BD7290024480C /* main.swift */,
+				740C996A20CD9DF100860711 /* Manager.swift */,
 				74A3BAA4207D60D000657A5D /* Support.swift */,
 				749665A92099EE0E00023D6F /* Assembler Chunker.swift */,
 				749665AB209B495300023D6F /* Assembler.swift */,
@@ -143,6 +146,7 @@
 			files = (
 				74A3BAA7207D63E800657A5D /* Driver.swift in Sources */,
 				19440ED8207D6AAE0048DF10 /* Numbers.txt in Sources */,
+				740C996B20CD9DF100860711 /* Manager.swift in Sources */,
 				74674ADC207BD7290024480C /* main.swift in Sources */,
 				749665AA2099EE0E00023D6F /* Assembler Chunker.swift in Sources */,
 				749665AC209B495300023D6F /* Assembler.swift in Sources */,
