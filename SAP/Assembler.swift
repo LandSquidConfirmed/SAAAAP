@@ -43,6 +43,11 @@ class Assembler {
                 e += 2
                 case ".end": bin[0] = bin.count - 2
                 if passTwo {
+                    lst.append("\n")
+                    lst.append("————————————————Symbol Table————————————————")
+                    for e in symbolTable {
+                        lst.append(e.key.description + ": " + e.value!.description)
+                    }
                     return
                 }
                 passTwo = true

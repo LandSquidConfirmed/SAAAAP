@@ -97,3 +97,14 @@ struct IntStack: CustomStringConvertible {
         return "\(stack)"
     }
 }
+
+func writeFile(path: String, text: String) {
+    do {
+        try text.write(toFile: path, atomically: false, encoding: String.Encoding.utf8)
+    }
+    catch let E as NSError {
+        print("Unable to save to given path: \(E)")
+    }
+}
+
+
