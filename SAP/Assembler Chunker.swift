@@ -12,6 +12,7 @@ import Foundation
 func splitFile(file: String)-> [Chunk] {//doesn't account for comment mid line
     let lines = splitStringIntoLines(expression: file)
     var chunks = [Chunk]()
+    var lineCounter = 0
     for l in lines {
         let parts = splitStringIntoParts(expression: l)
         var stringFound = false
@@ -25,26 +26,27 @@ func splitFile(file: String)-> [Chunk] {//doesn't account for comment mid line
                 }
                 if first == "\"" {
                     stringFound = true
-                    chunks.append(Chunk(type: .ImmediateString, stringValue: p))
+                    chunks.append(Chunk(type: .ImmediateString, line: lineCounter, stringValue: p))
                     continue
                 }
                 let last = p.last!
-                if first == "." {chunks.append(Chunk(type: .Directive, stringValue: p)); continue}
-                if first == "#" {chunks.append(Chunk(type: .ImmediateInteger, stringValue: p)); continue}
-                if first == "r" && charToUni(last) < 58 && charToUni(last) > 47 {chunks.append(Chunk(type: .Register, stringValue: p)); continue}
-                if last == ":" {chunks.append(Chunk(type: .LabelDefinition, stringValue: p)); continue}
+                if first == "." {chunks.append(Chunk(type: .Directive, line: lineCounter, stringValue: p)); continue}
+                if first == "#" {chunks.append(Chunk(type: .ImmediateInteger, line: lineCounter, stringValue: p)); continue}
+                if first == "r" && charToUni(last) < 58 && charToUni(last) > 47 {chunks.append(Chunk(type: .Register, line: lineCounter, stringValue: p)); continue}
+                if last == ":" {chunks.append(Chunk(type: .LabelDefinition, line: lineCounter, stringValue: p)); continue}
                 var foundInstruction = false
                 for e in 0...57 {
                     if String(describing: Command(rawValue: e)!) == (p) {
-                        chunks.append(Chunk(type: .Instruction, stringValue: p))
+                        chunks.append(Chunk(type: .Instruction, line: lineCounter, stringValue: p))
                         foundInstruction = true
                         break
                     }
                 }
                 if foundInstruction {continue}
-                else {chunks.append(Chunk(type: .Label, stringValue: p))}
+                else {chunks.append(Chunk(type: .Label, line: lineCounter, stringValue: p))}
             }
         }
+        lineCounter += 1
     }
     return chunks
 }
@@ -58,24 +60,24 @@ func tokenizeilator(_ chunks: [Chunk])->[Token]{
                 print("Incorrect number of characters in register definition")
                 break
             }
-            tokens.append(Token(type: c.type, intValue: Int(String(describing: c.stringValue.characters.last!)), stringValue: nil, tupleValue: nil, description: "Hnelo"))
+            tokens.append(Token(type: c.type, intValue: Int(String(describing: c.stringValue.characters.last!)), stringValue: nil, tupleValue: nil, line: c.line, description: c.stringValue))
             continue
         }
         if c.type == .LabelDefinition {
-            tokens.append(Token(type: c.type, intValue: nil, stringValue: String(c.stringValue.dropLast()), tupleValue: nil, description: "Hwidoo"))
+            tokens.append(Token(type: c.type, intValue: nil, stringValue: String(c.stringValue.dropLast()), tupleValue: nil, line: c.line, description: c.stringValue))
             continue
         }
         if c.type == .Label {
-            tokens.append(Token(type: c.type, intValue: nil, stringValue: c.stringValue, tupleValue: nil, description: c.stringValue))
+            tokens.append(Token(type: c.type, intValue: nil, stringValue: c.stringValue, tupleValue: nil, line: c.line, description: c.stringValue))
             continue
         }
         if c.type == .ImmediateString {
-            tokens.append(Token(type: c.type, intValue: nil, stringValue: String(c.stringValue.dropLast().dropFirst()), tupleValue: nil, description: "Oeehoo"))
+            tokens.append(Token(type: c.type, intValue: nil, stringValue: String(c.stringValue.dropLast().dropFirst()), tupleValue: nil, line: c.line, description: c.stringValue))
             continue
         }
         if c.type == .ImmediateInteger {
             if let v = Int(c.stringValue.dropFirst()) {
-                tokens.append(Token(type: c.type, intValue: v, stringValue: nil, tupleValue: nil, description: "Queeg"))
+                tokens.append(Token(type: c.type, intValue: v, stringValue: nil, tupleValue: nil, line: c.line, description: c.stringValue))
             }
             else {
                 print("Integer provided is not a number")
@@ -89,7 +91,7 @@ func tokenizeilator(_ chunks: [Chunk])->[Token]{
         if c.type == .Instruction {
             for e in 0...57 {
                 if String(describing: Command(rawValue: e)!) == c.stringValue {
-                    tokens.append(Token(type: c.type, intValue: e, stringValue: c.stringValue, tupleValue: nil, description: "Hok"))
+                    tokens.append(Token(type: c.type, intValue: e, stringValue: c.stringValue, tupleValue: nil, line: c.line, description: c.stringValue))
                     break
                 }
             }
@@ -101,7 +103,7 @@ func tokenizeilator(_ chunks: [Chunk])->[Token]{
             str.removeFirst()
             for e in 0...4 {
                 if String(describing: Directive(rawValue: e)!) == str {
-                    tokens.append(Token(type: c.type, intValue: e, stringValue: c.stringValue, tupleValue: nil, description: "Hokel"))
+                    tokens.append(Token(type: c.type, intValue: e, stringValue: c.stringValue, tupleValue: nil, line: c.line, description: c.stringValue))
                     break
                 }
             }
@@ -130,6 +132,7 @@ enum TokenType {
 
 struct Chunk {
     let type: TokenType
+    let line: Int
     var stringValue: String
     func printThis() {
         print(stringValue + " " + String(describing: type))
@@ -141,6 +144,7 @@ struct Token: CustomStringConvertible {
     let intValue: Int?
     let stringValue: String?
     let tupleValue: Tuple?
+    let line: Int
     
     func printThis() {
         print(stringValue as Any)
@@ -149,17 +153,17 @@ struct Token: CustomStringConvertible {
         print("_____________________________________________")
     }
     
-    var description = "Henlo"
+    var description: String
 }
 
-struct Tuple: CustomStringConvertible{
+struct Tuple: CustomStringConvertible {
     let currentState: Int
     let inputCharachter: Int
     let newState: Int
     let outputCharacter: Int
     let direction: Int
     
-    var description = "Hnelo"
+    var description = "Oeehoo"
 }
 
 
