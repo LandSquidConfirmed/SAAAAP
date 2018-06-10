@@ -16,16 +16,19 @@ var file = readTextFile("/Users/maxwelllittle/Library/Autosave Information/SAP/S
 //for e in tokenizeilator(splitFile(file: file.fileText!)) {
     //e.printThis()
 //}
-//assem.passOne(tokenizeilator(splitFile(file: file.fileText!)))
+assem.passOne(tokenizeilator(splitFile(file: file.fileText!)))
 
 //print(assem.symbolTable)
 
-//assem.passOne(tokenizeilator(splitFile(file: file.fileText!)))
+assem.passOne(tokenizeilator(splitFile(file: file.fileText!)))
 
+for e in assem.lst {
+    print(e)
+}
 //for e in assem.bin {
 //    print(e!)
 //}
-SAP.Driver()
+//SAP.Driver()
 
 
 

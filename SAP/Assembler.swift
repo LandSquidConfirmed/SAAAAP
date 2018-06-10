@@ -13,15 +13,25 @@ class Assembler {
     
     //Symbol table stored in dict.
     var symbolTable = [String: Int?]()
-    var emptyLabelLocs = [Int: Token]()
     var bin = [Int?]()
     var programSize = 0
+    var passTwo = false
+    var lst = [String]()
     
     func passOne(_ tokens: [Token]) {
         bin.append(programSize)
         bin.append(nil)
         var e = 0
+        var lstLine = tokens[e].line.description + ": "
+        var lastLine = tokens[e].line
+        var lastE = 0
+        var lastBin = 0
         while e < tokens.count {
+            
+            lastLine = tokens[e].line
+            lastE = e
+            lastBin = bin.count
+            
             let token = tokens[e]
             if token.type == .Directive {
                 switch String(describing: token.stringValue!) {
@@ -31,7 +41,13 @@ class Assembler {
                 e += 2
                 case ".String": string(tokens[e + 1])
                 e += 2
-                case ".end": bin[0] = bin.count-2
+                case ".end": bin[0] = bin.count - 2
+                if passTwo {
+                    return
+                }
+                passTwo = true
+                bin = [Int?]()
+                lst = [String]()
                     return
                 case ".allocate": allocate(tokens[e + 1])
                 e += 2
@@ -41,8 +57,7 @@ class Assembler {
             else if token.type == .Instruction {
                 bin.append(token.intValue!)
                 switch String(describing: token.stringValue!) {
-                case "halt": bin.append(0)
-                e += 1
+                case "halt": e += 1
                 case "clrr": r(tokens[e + 1])
                 e += 2
                 case "clrx": r(tokens[e + 1])
@@ -163,7 +178,7 @@ class Assembler {
                     return
                 }
             }
-            else if token.type == .LabelDefinition { //Need to do this to fix getting the erroy you're getting with the start thingy
+            else if token.type == .LabelDefinition {
                 symbolTable[token.stringValue!] = bin.count - 2
                 e += 1
             }
@@ -172,17 +187,19 @@ class Assembler {
                 token.printThis()
                 return
             }
-        }
-    }
-    
-    
-    func passTwo() {//Label not declared error here
-        //print(emptyLabelLocs)
-        //print(symbolTable)
-        
-        for t in 0..<bin.count {
-            if bin[t] == nil {
-                bin[t] = symbolTable[emptyLabelLocs[t]!.stringValue!]!!
+            
+            if passTwo {
+                if lastLine != tokens[e].line {
+                    for x in lastBin..<bin.count {
+                        lstLine += bin[x]!.description + " "
+                    }
+                    for x in lastE..<e {
+                        lstLine += tokens[x].description + " "
+                    }
+                    lst.append(lstLine)
+                    lstLine = ""
+                    lstLine = tokens[e].line.description + ": "
+                }
             }
         }
     }
@@ -192,12 +209,14 @@ class Assembler {
     
     
     
-    
     //Need Error Checking
-    
     private func start(_ label: Token, _ e: Int) {
-        bin[1] = nil
-        emptyLabelLocs[1] = label
+        if passTwo {
+            bin[1] = symbolTable[label.stringValue!]!
+        }
+        else {
+            bin[1] = nil
+        }
     }
     private func string(_ string: Token) {
         bin.append(string.stringValue!.count)
@@ -218,34 +237,48 @@ class Assembler {
         bin.append(r.intValue!)
     }
     private func label(_ label: Token, _ e: Int) {
-        if symbolTable[label.stringValue!] != nil {
+        if passTwo {
             bin.append(symbolTable[label.stringValue!]!!)
         }
         else {
-            bin.append(nil)
-            emptyLabelLocs[bin.count] = label
+            if symbolTable[label.stringValue!] != nil {
+                bin.append(symbolTable[label.stringValue!]!!)
+            }
+            else {
+                bin.append(nil)
+            }
         }
     }
     private func rLabel(_ r: Token, _ label: Token, _ e: Int) {
-        if symbolTable[label.stringValue!] != nil {
+        if passTwo {
             bin.append(r.intValue!)
             bin.append(symbolTable[label.stringValue!]!!)
         }
         else {
-            bin.append(r.intValue!)
-            bin.append(nil)
-            emptyLabelLocs[e + 2] = label
+            if symbolTable[label.stringValue!] != nil {
+                bin.append(r.intValue!)
+                bin.append(symbolTable[label.stringValue!]!!)
+            }
+            else {
+                bin.append(r.intValue!)
+                bin.append(nil)
+            }
         }
     }
     private func labelR(_ label: Token, _ r: Token, _ e: Int) {
-        if symbolTable[label.stringValue!] != nil {
+        if passTwo {
             bin.append(symbolTable[label.stringValue!]!!)
             bin.append(r.intValue!)
         }
         else {
-            bin.append(nil)
-            bin.append(r.intValue!)
-            emptyLabelLocs[e + 1] = label
+            if symbolTable[label.stringValue!] != nil {
+                bin.append(symbolTable[label.stringValue!]!!)
+                bin.append(r.intValue!)
+            }
+            else {
+                bin.append(nil)
+                bin.append(r.intValue!)
+            }
         }
     }
     private func kachow() {}
