@@ -14,6 +14,12 @@ class Manager {
     var chunks = [Chunk]()
     var tokens = [Token]()
     
+    init(){
+        for i in assem.symbolTable{
+            fullTable += ("\(i.key.description): \(i.value!.description)\n")
+        }
+    }
+    
     func runAll(path: String) {
         loadFile(path: path)
         chunkFile()

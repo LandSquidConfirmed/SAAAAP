@@ -483,10 +483,6 @@ class Driver {
             return
             case "pst": if(string.count == 1){
                 print("Symbol table: ")
-                var fullTable = ""
-                for i in assem.symbolTable{
-                    fullTable += ("\(i.key.description): \(i.value!.description)\n")
-                }
                 print(fullTable)
                 return
             }
