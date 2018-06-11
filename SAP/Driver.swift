@@ -16,6 +16,10 @@ class Driver: NSObject {
     var registers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     var lastcmp = 0
     var stack = IntStack(size: 10000)
+    var points = [0]
+    var bool = true
+    var sstep = false
+    var num = 0
     
     init(Program: String) {
         var iter = 0
@@ -29,124 +33,130 @@ class Driver: NSObject {
         mem.remove(at: 0)
     }
     
-    func debugger(){
-        
-    }
-    
     func Driver() {//add quit when it gets to the end of memory
-        var num = mem[programCounter]
-        
+        num = mem[programCounter]
         while num != 0 {
-            //let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
-            //perform(command)
-            //print(num)
-            let command = String(describing: Command(rawValue: num)!)
-            //print(command)
-            switch command {
-            case "clrr": clrr(mem[programCounter + 1])
-            programCounter += 2
-            case "clrx": clrx(mem[programCounter + 1])
-            programCounter += 2
-            case "clrm": clrx(mem[programCounter + 1])
-            programCounter += 2
-            case "clrb": clrb(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "movir": movir(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "movrr": movrr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "movrm": movrm(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "movmr": movmr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "movxr": movxr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "movar": movar(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "movb": movb(mem[programCounter + 1], mem[programCounter + 2], mem[programCounter + 3])
-            programCounter += 4
-            case "addir": addir(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "addrr": addrr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "addmr": addmr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "addxr": addxr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "subir": addir(-(mem[programCounter + 1]), mem[programCounter + 2])
-            programCounter += 3
-            case "subrr": subrr((mem[programCounter + 1]), mem[programCounter + 2])
-            programCounter += 3
-            case "divrr": divrr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "submr": addmr(-(mem[programCounter + 1]), mem[programCounter + 2])
-            programCounter += 3
-            case "divmr": divmr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "subxr": addxr(-(mem[programCounter + 1]), mem[programCounter + 2])
-            case "divxr": divxr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "mulir": mulir(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "jmp": jmp(mem[programCounter + 1])
-            case "sojz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
-            case "mulrr": mulrr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "sojnz": sojnz(mem[programCounter + 1], mem[programCounter + 2])
-            case "mulmr": mulmr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "aojz": aojz(mem[programCounter + 1], mem[programCounter + 2])
-            case "mulxr": mulxr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "aojnz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
-            case "divir": divir(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "cmpir": cmpir(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "cmprr": cmprr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "cmpmr": cmpmr(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "jmpn": jmpn(mem[programCounter + 1])
-            case "jmpz": jmpz(mem[programCounter + 1])
-            case "jmpp": jmpp(mem[programCounter + 1])
-            case "jsr": jsr(mem[programCounter + 1])
-            case "ret": ret()
-            case "push": push(mem[programCounter + 1])
-            programCounter += 2
-            case "pop": pop(mem[programCounter + 1])
-            programCounter += 2
-            case "stackc": stackc(mem[programCounter + 1])
-            programCounter += 2
-            case "outci": outci(mem[programCounter + 1])
-            programCounter += 2
-            case "outcr": outcr(mem[programCounter + 1])
-            programCounter += 2
-            case "outcx": outcx(mem[programCounter + 1])
-            programCounter += 2
-            case "outcb": outcb(mem[programCounter + 1], mem[programCounter])
-            programCounter += 3
-            case "readi": readi(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "printi": printi(mem[programCounter + 1])
-            programCounter += 2
-            case "readc": readc(_r: mem[programCounter + 1])
-            programCounter += 2
-            case "readln": readln(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "brk": brk()
-            programCounter += 1
-            case "movrx": movrx(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "movxx": movxx(mem[programCounter + 1], mem[programCounter + 2])
-            programCounter += 3
-            case "outs": outs(mem[programCounter + 1])
-            programCounter += 2
-            case "nop": nop()
-            programCounter += 1
-            case "jmpne": jmpne(mem[programCounter + 1])
-            default: print("Bad Command or something")
-                return
+            for i in points{
+                if((i != programCounter) && (bool == true)){
+                    //let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
+                    //perform(command)
+                    //print(num)
+                    let command = String(describing: Command(rawValue: num)!)
+                    //print(command)
+                    switch command {
+                    case "clrr": clrr(mem[programCounter + 1])
+                    programCounter += 2
+                    case "clrx": clrx(mem[programCounter + 1])
+                    programCounter += 2
+                    case "clrm": clrx(mem[programCounter + 1])
+                    programCounter += 2
+                    case "clrb": clrb(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "movir": movir(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "movrr": movrr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "movrm": movrm(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "movmr": movmr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "movxr": movxr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "movar": movar(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "movb": movb(mem[programCounter + 1], mem[programCounter + 2], mem[programCounter + 3])
+                    programCounter += 4
+                    case "addir": addir(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "addrr": addrr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "addmr": addmr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "addxr": addxr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "subir": addir(-(mem[programCounter + 1]), mem[programCounter + 2])
+                    programCounter += 3
+                    case "subrr": subrr((mem[programCounter + 1]), mem[programCounter + 2])
+                    programCounter += 3
+                    case "divrr": divrr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "submr": addmr(-(mem[programCounter + 1]), mem[programCounter + 2])
+                    programCounter += 3
+                    case "divmr": divmr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "subxr": addxr(-(mem[programCounter + 1]), mem[programCounter + 2])
+                    case "divxr": divxr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "mulir": mulir(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "jmp": jmp(mem[programCounter + 1])
+                    case "sojz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
+                    case "mulrr": mulrr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "sojnz": sojnz(mem[programCounter + 1], mem[programCounter + 2])
+                    case "mulmr": mulmr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "aojz": aojz(mem[programCounter + 1], mem[programCounter + 2])
+                    case "mulxr": mulxr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "aojnz": aojnz(mem[programCounter + 1], mem[programCounter + 2])
+                    case "divir": divir(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "cmpir": cmpir(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "cmprr": cmprr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "cmpmr": cmpmr(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "jmpn": jmpn(mem[programCounter + 1])
+                    case "jmpz": jmpz(mem[programCounter + 1])
+                    case "jmpp": jmpp(mem[programCounter + 1])
+                    case "jsr": jsr(mem[programCounter + 1])
+                    case "ret": ret()
+                    case "push": push(mem[programCounter + 1])
+                    programCounter += 2
+                    case "pop": pop(mem[programCounter + 1])
+                    programCounter += 2
+                    case "stackc": stackc(mem[programCounter + 1])
+                    programCounter += 2
+                    case "outci": outci(mem[programCounter + 1])
+                    programCounter += 2
+                    case "outcr": outcr(mem[programCounter + 1])
+                    programCounter += 2
+                    case "outcx": outcx(mem[programCounter + 1])
+                    programCounter += 2
+                    case "outcb": outcb(mem[programCounter + 1], mem[programCounter])
+                    programCounter += 3
+                    case "readi": readi(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "printi": printi(mem[programCounter + 1])
+                    programCounter += 2
+                    case "readc": readc(_r: mem[programCounter + 1])
+                    programCounter += 2
+                    case "readln": readln(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "brk": brk()
+                    programCounter += 1
+                    case "movrx": movrx(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "movxx": movxx(mem[programCounter + 1], mem[programCounter + 2])
+                    programCounter += 3
+                    case "outs": outs(mem[programCounter + 1])
+                    programCounter += 2
+                    case "nop": nop()
+                    programCounter += 1
+                    case "jmpne": jmpne(mem[programCounter + 1])
+                    default: print("Bad Command or something")
+                        return
+                    }
+                    if (sstep){
+                        sstep = false
+                        brk()
+                    }
+                }
+                else{
+                    brk()
+                }
             }
             num = mem[programCounter]
         }
@@ -363,6 +373,177 @@ class Driver: NSObject {
         }
     }
     func brk(){
+        if let command = readLine(){
+            var string = splitStringIntoParts(expression: command)
+            switch string[0] {
+            case "setbk": if(string.count == 2){
+                if let point = Int(string[1]){
+                    points.append(point)
+                    return
+                }
+            }
+            print("Bad Command or something")
+            return
+            case "rmbk": if(string.count == 2){
+                if let point = Int(string[1]){
+                    for i in 0..<points.count{
+                        if points[i] == point{
+                            points.remove(at: i)
+                            return
+                        }
+                    }
+                }
+            }
+            print("Bad Command or something")
+            case "clrbk": if(string.count == 1){
+                points = [0]
+                return
+            }
+            print("Bad Command or something")
+            return
+            case "disbk": if(string.count == 1){
+                bool = false
+                return
+            }
+            print("Bad Command or something")
+            return
+            case "enbk": if(string.count == 1){
+                bool = true
+                return
+            }
+            print("Bad Command or something")
+            return
+            case "pbk": if(string.count == 1){
+                print("Breakpoints: ", terminator:"")
+                for i in points{
+                    print(i, terminator:"")
+                }
+                return
+            }
+            print("Bad Command or something")
+            return
+            case "preg": if(string.count == 1){
+                print("Registers: ", terminator:"")
+                for i in 0..<registers.count{
+                    print("r\(i):", terminator:"")
+                    print(registers[i])
+                }
+                return
+            }
+            print("Bad Command or something")
+            return
+            case "wreg": if(string.count == 3){
+                if let reg = Int(string[1]){
+                    if((-1 < reg) && (reg < 10)){
+                        if let val = Int(string[2]){
+                            registers[reg] = val
+                            return
+                        }
+                    }
+                }
+            }
+            print("Bad Command or something")
+            return
+            case "wpc": if(string.count == 2){
+                if let val = Int(string[1]){
+                    programCounter = val
+                    return
+                }
+            }
+            print("Bad Command or something")
+            return
+            case "pmem": if(string.count == 3){
+                if let val = Int(string[1]){
+                    if((-1 < val) && (val < 10000)){
+                        if let val2 = Int(string[2]){
+                            if((val < val2) && (val2 < 10000)){
+                                for i in val...val2{
+                                    print(mem[i])
+                                }
+                                return
+                            }
+                        }
+                    }
+                }
+            }
+            print("Bad Command or something")
+            return
+            case "deas": print("lol")
+            case "wmem": if(string.count == 3){
+                if let val = Int(string[1]){
+                    if((-1 < val) && (val < 10000)){
+                        if let val2 = Int(string[2]){
+                            registers[val] = val2
+                            return
+                        }
+                    }
+                }
+            }
+            print("Bad Command or something")
+            return
+            case "pst": if(string.count == 1){
+                print("Symbol table: ")
+                var fullTable = ""
+                for i in assem.symbolTable{
+                    fullTable += ("\(i.key.description): \(i.value!.description)\n")
+                }
+                print(fullTable)
+                return
+            }
+            print("Bad Command or something")
+            return
+            case "g": if(string.count == 1){
+                let point = programCounter
+                for i in 0..<points.count{
+                    if points[i] == point{
+                        points.remove(at: i)
+                        return
+                    }
+                }
+            }
+            print("Bad Command or something")
+            return
+            case "s": if(string.count == 1){
+                sstep = true
+                return
+            }
+            print("Bad Command or something")
+            return
+            case "exit": if(string.count == 1){
+                num = 0
+                return
+            }
+            print("Bad Command or something")
+            return
+            case "help": if(string.count == 1){
+                print(fit(s: "setbk <address>", size: 35), "|", "set breakpoint at <address>")
+                print(fit(s: "rmbk <address>", size: 35), "|", "remove breakpoint at <address>")
+                print(fit(s: "clrbk", size: 35), "|", "clear all breakpoints")
+                print(fit(s: "disbk", size: 35), "|", "temporarily disable all breakpoints")
+                print(fit(s: "enbk", size: 35), "|", "enable breakpoints")
+                print(fit(s: "pbk", size: 35), "|", "print breakpoint table")
+                print(fit(s: "preg", size: 35), "|", "print the registers")
+                print(fit(s: "wreg <number> <value>", size: 35), "|", "write vale of register <number> to <value>")
+                print(fit(s: "wpc <value>", size: 35), "|", "change value of PC to <value>")
+                print(fit(s: "pmem <start address> <end address>", size: 35), "|", "print memory locations")
+                print(fit(s: "deas <start address> <end address>", size: 35), "|", "deassemble memory locations")
+                print(fit(s: "wmem <adress> <value>", size: 35), "|", "change value of memory at <address> to <value>")
+                print(fit(s: "pst", size: 35), "|", "print symbol table")
+                print(fit(s: "g", size: 35), "|", "continue program execution")
+                print(fit(s: "s", size: 35), "|", "single step")
+                print(fit(s: "exit", size: 35), "|", "terminate virtual machine")
+                print(fit(s: "help", size: 35), "|", "print this table")
+            }
+            print("Bad Command or something")
+            return
+            default: print("Bad Command or something")
+                return
+            }
+        }
+        else{
+            print("bad command")
+            brk()
+        }
     }
     func movrx(_ r1: Int, _ r2: Int){
         mem[registers[r2]] = registers[r1]
