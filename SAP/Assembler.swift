@@ -143,8 +143,7 @@ class Assembler {
                 e += 2
                 case "jsr": label(tokens[e + 1], e)
                 e += 2
-                case "ret": kachow()
-                e += 1
+                case "ret": e += 1
                 case "push": r(tokens[e + 1])
                 e += 2
                 case "pop": r(tokens[e + 1])
@@ -167,16 +166,14 @@ class Assembler {
                 e += 2
                 case "readln": labelR(tokens[e + 1], tokens[e + 2], e)
                 e += 3
-                case "brk": kachow()
-                e += 1
+                case "brk": e += 1
                 case "movrx": rr(tokens[e + 1], tokens[e + 2])
                 e += 3
                 case "movxx": rr(tokens[e + 1], tokens[e + 2])
                 e += 3
                 case "outs": label(tokens[e + 1], e)
                 e += 2
-                case "nop": kachow()
-                e += 1
+                case "nop": e += 1
                 case "jmpne": label(tokens[e + 1], e)
                 e += 2
                 default: print("Bad Command or something")
@@ -287,7 +284,6 @@ class Assembler {
             }
         }
     }
-    private func kachow() {}
     
     func saveLst(fileName: String) {
         var fullLst = ""

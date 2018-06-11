@@ -19,7 +19,7 @@ class Manager {
         chunkFile()
         tokenizeFile()
         assembleFile()
-        saveData(fileName: "Turing2")
+        saveData(fileName: "Tonk")
         runVM()
     }
     

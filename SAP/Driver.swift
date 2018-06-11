@@ -29,7 +29,6 @@ class Driver {
         }
         self.programLength = mem[0]
         self.programCounter = mem[1]
-        points.append(programCounter)
         mem.remove(at: 0)
         mem.remove(at: 0)
     }
@@ -44,11 +43,7 @@ class Driver {
                 }
             }
                 if((run) && (bool == true)){
-                    //let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
-                    //perform(command)
-                    //print(num)
                     let command = String(describing: Command(rawValue: num)!)
-                    //print(command)
                     switch command {
                     case "clrr": clrr(mem[programCounter + 1])
                     programCounter += 2
@@ -378,6 +373,7 @@ class Driver {
         }
     }
     func brk(){
+        programCounter -= 1
         if let command = readLine(){
             var string = splitStringIntoParts(expression: command)
             switch string[0] {
@@ -494,13 +490,8 @@ class Driver {
             print("Bad Command or something")
             return
             case "g": if(string.count == 1){
-                let point = programCounter
-                for i in 0..<points.count{
-                    if points[i] == point{
-                        points.remove(at: i)
-                        return
-                    }
-                }
+                programCounter += 1
+                return
             }
             print("Bad Command or something")
             return
