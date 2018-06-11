@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Driver: NSObject {
+class Driver {
     
     var mem = [Int](repeating: 0, count: 10002)
     let programLength: Int
