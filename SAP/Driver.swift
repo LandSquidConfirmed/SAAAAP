@@ -35,9 +35,14 @@ class Driver {
     
     func Driver() {//add quit when it gets to the end of memory
         num = mem[programCounter]
+        var run = true
         while num != 0 {
             for i in points{
-                if((i != programCounter) && (bool == true)){
+                if i == programCounter{
+                    run = false
+                }
+            }
+                if((run) && (bool == true)){
                     //let command = NSSelectorFromString(String(describing: Command(rawValue: num)))
                     //perform(command)
                     //print(num)
@@ -157,7 +162,7 @@ class Driver {
                 else{
                     brk()
                 }
-            }
+            
             num = mem[programCounter]
         }
         
