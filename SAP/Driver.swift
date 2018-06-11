@@ -16,7 +16,7 @@ class Driver {
     var registers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     var lastcmp = 0
     var stack = IntStack(size: 10000)
-    var points = [0]
+    var points: [Int] = []
     var bool = true
     var sstep = false
     var num = 0
@@ -29,6 +29,7 @@ class Driver {
         }
         self.programLength = mem[0]
         self.programCounter = mem[1]
+        points.append(programCounter)
         mem.remove(at: 0)
         mem.remove(at: 0)
     }
@@ -162,7 +163,6 @@ class Driver {
                 else{
                     brk()
                 }
-            
             num = mem[programCounter]
         }
         
