@@ -529,6 +529,7 @@ class Driver {
                 print(fit(s: "s", size: 35), "|", "single step")
                 print(fit(s: "exit", size: 35), "|", "terminate virtual machine")
                 print(fit(s: "help", size: 35), "|", "print this table")
+                return
             }
             print("Bad Command or something")
             return
